@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&amp;family=Red+Hat+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/inventive-ai-design-system-6f2f885b-3723-4521-a6d7-70c85f249cec/colors_and_type.css">
+<style>
+  body{margin:0;background:#EEF0F1;font-family:'Figtree',system-ui,sans-serif}
+  a{color:#047A9F;text-decoration:none}
+  a:hover{color:#035E7B}
+  .dv-turn{padding:44px 48px 36px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+  .dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 22px}
+  .dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#191D1F;color:#fff;border-radius:4px;text-decoration:none}
+  .dv-tname{font:600 13px/1.3 'Figtree',sans-serif;color:#191D1F}
+  .dv-tname a{color:#191D1F}
+  .dv-opts{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start}
+  .dv-opt{flex:none;display:flex;flex-direction:column;gap:11px;scroll-margin-top:16px}
+  .dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#191D1F;border-radius:5px;text-decoration:none}
+  .dv-olabel{display:flex;align-items:baseline;gap:9px;font:400 12px/1.4 'Figtree',sans-serif;color:rgba(0,0,0,.55);max-width:1080px}
+  .dv-olabel b{color:#191D1F;font-weight:600}
+  .dv-card{background:#fff;border:1px solid #E5E7EB;border-radius:8px;box-shadow:0 0 1px rgba(29,33,45,.2),0 0 2px rgba(29,33,45,.08),0 2px 4px rgba(29,33,45,.08);overflow:hidden}
+  .dv-opt:target .dv-oid{background:#047A9F;color:#fff}
+  .dv-next{margin:26px 0 0;font:13px/1.6 'Figtree',sans-serif;color:rgba(0,0,0,.55)}
+  .qlink{color:#191D1F}
+  .qlink:hover{color:#047A9F}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Community “Ask &amp; Answer” feed — three directions</span></div>
+<div class="dv-opts">
+
+<!-- ============ 1a : Helpdesk list ============ -->
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a><span><b>Helpdesk list.</b> Dense, scannable rows with a left vote pill and hairline dividers. Prominent category sidebar, muted accents — the classic support-forum read for triaging issues fast.</span></div>
+<div class="dv-card" style="width:1080px">
+  <!-- header -->
+  <div style="height:60px;padding:0 24px;border-bottom:1px solid #E6E9EA;display:flex;align-items:center;gap:20px;background:#fff">
+    <div style="display:flex;align-items:center;gap:9px">
+      <img src="assets/inventive-mark.svg" width="26" height="26" alt="">
+      <span style="font-family:'Red Hat Display';font-weight:700;font-size:15px;color:#191D1F;letter-spacing:-.2px">Inventive AI <span style="color:#7C8588;font-weight:500">Community</span></span>
+    </div>
+    <nav style="display:flex;gap:4px;margin-left:14px">
+      <span style="padding:7px 12px;border-radius:6px;font-size:13px;font-weight:600;color:#035E7B;background:#E0EDF1">Ask &amp; Answer</span>
+      <span style="padding:7px 12px;border-radius:6px;font-size:13px;font-weight:500;color:#4A5154">Knowledge Base</span>
+      <span style="padding:7px 12px;border-radius:6px;font-size:13px;font-weight:500;color:#4A5154">Product Updates</span>
+    </nav>
+    <div style="flex:1;max-width:300px;margin-left:auto;position:relative">
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="#7C8588" stroke-width="1.7" style="position:absolute;left:10px;top:9px"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.5 13.5L17 17"></path></svg>
+      <input placeholder="Search questions…" style="width:100%;box-sizing:border-box;padding:8px 10px 8px 31px;font-size:13px;border:1px solid #E5E7EB;border-radius:6px;background:#F9FBFB;outline:none;font-family:'Figtree'">
+    </div>
+    <button style="font-family:'Figtree';font-weight:600;font-size:13px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:6px;padding:8px 14px;cursor:pointer;box-shadow:0 1px 2px rgba(16,24,40,.05)">Ask a Question</button>
+    <div style="width:32px;height:32px;border-radius:50%;background:#419C4D;color:#fff;font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center">DR</div>
+  </div>
+  <!-- body -->
+  <div style="display:flex;background:#fff">
+    <!-- sidebar -->
+    <aside style="width:230px;flex:none;border-right:1px solid #E6E9EA;padding:18px 12px;background:#F9FBFB">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9CA3AF;padding:0 8px 8px">Categories</div>
+      <div style="display:flex;flex-direction:column;gap:1px">
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;font-weight:600;color:#035E7B;background:#E0EDF1"><span style="width:7px;height:7px;border-radius:2px;background:#047A9F"></span>All Questions<span style="margin-left:auto;color:#5D9AAD;font-weight:500">842</span></div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:7px;height:7px;border-radius:2px;background:#31A2DA"></span>Getting Started<span style="margin-left:auto;color:#9CA3AF">96</span></div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:7px;height:7px;border-radius:2px;background:#FF8800"></span>RFP &amp; Proposals<span style="margin-left:auto;color:#9CA3AF">211</span></div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:7px;height:7px;border-radius:2px;background:#A084E8"></span>Security Questionnaires<span style="margin-left:auto;color:#9CA3AF">158</span></div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:7px;height:7px;border-radius:2px;background:#419C4D"></span>Knowledge Hub<span style="margin-left:auto;color:#9CA3AF">124</span></div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:7px;height:7px;border-radius:2px;background:#A084E8"></span>AI Agents &amp; Copilot<span style="margin-left:auto;color:#9CA3AF">87</span></div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:7px;height:7px;border-radius:2px;background:#31A2DA"></span>Integrations<span style="margin-left:auto;color:#9CA3AF">54</span></div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:7px;height:7px;border-radius:2px;background:#FF6969"></span>Account &amp; Billing<span style="margin-left:auto;color:#9CA3AF">42</span></div>
+      </div>
+    </aside>
+    <!-- main -->
+    <div style="flex:1;min-width:0;padding:20px 24px 26px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:4px">
+        <h1 style="margin:0;font-family:'Red Hat Display';font-size:22px;font-weight:700;color:#191D1F;letter-spacing:-.3px">Ask &amp; Answer</h1>
+        <span style="font-size:13px;color:#6B7280">842 questions from the Inventive AI community</span>
+      </div>
+      <!-- sort tabs -->
+      <div style="display:flex;gap:22px;border-bottom:1px solid #E6E9EA;margin:14px 0 0">
+        <span style="padding:9px 0;font-size:13px;font-weight:600;color:#047A9F;border-bottom:2px solid #047A9F">New</span>
+        <span style="padding:9px 0;font-size:13px;font-weight:500;color:#6B7280">Trending</span>
+        <span style="padding:9px 0;font-size:13px;font-weight:500;color:#6B7280">Unanswered</span>
+        <span style="padding:9px 0;font-size:13px;font-weight:500;color:#6B7280">Top</span>
+        <div style="margin-left:auto;display:flex;gap:7px;align-items:center;padding-bottom:6px">
+          <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border:1px solid #E5E7EB;border-radius:6px;font-size:12px;color:#4A5154">All categories</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border:1px solid #E5E7EB;border-radius:6px;font-size:12px;color:#4A5154">Tags</span>
+        </div>
+      </div>
+      <!-- rows -->
+      <div>
+        <div style="display:flex;gap:14px;padding:15px 4px;border-bottom:1px solid #F0F2F3">
+          <div style="flex:none;width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:2px"><div style="display:flex;flex-direction:column;align-items:center;border:1px solid #E5E7EB;border-radius:6px;padding:4px 0;width:44px"><svg width="13" height="13" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="#047A9F"></path></svg><span style="font-size:13px;font-weight:700;color:#191D1F">24</span></div></div>
+          <div style="flex:1;min-width:0">
+            <a class="qlink" style="font-size:15px;font-weight:600;line-height:1.35;display:block">Draft generation stuck at “Analyzing knowledge base” for large RFPs</a>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px">
+              <span style="display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:500;background:#FFEEE7;color:#B45309"><span style="width:6px;height:6px;border-radius:50%;background:#FF8800"></span>RFP &amp; Proposals</span>
+              <span style="font-size:12px;color:#6B7280">by <b style="color:#4A5154;font-weight:600">Priya Nair</b> · 2h ago</span>
+              <span style="padding:2px 7px;border-radius:4px;font-size:11px;background:#F3F4F6;color:#6B7280">draft</span>
+              <span style="padding:2px 7px;border-radius:4px;font-size:11px;background:#F3F4F6;color:#6B7280">performance</span>
+            </div>
+          </div>
+          <div style="flex:none;display:flex;align-items:center;gap:16px;color:#6B7280;font-size:12px;padding-top:3px">
+            <span style="display:inline-flex;align-items:center;gap:5px;color:#2E7D39;font-weight:600"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#2E7D39" stroke-width="2"><path d="M4 10l4 4 8-8"></path></svg>Solved</span>
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h12a1 1 0 011 1v7a1 1 0 01-1 1H8l-4 3V6a1 1 0 011-1z"></path></svg>8</span>
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>412</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;padding:15px 4px;border-bottom:1px solid #F0F2F3">
+          <div style="flex:none;width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:2px"><div style="display:flex;flex-direction:column;align-items:center;border:1px solid #E5E7EB;border-radius:6px;padding:4px 0;width:44px"><svg width="13" height="13" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="#9CA3AF"></path></svg><span style="font-size:13px;font-weight:700;color:#191D1F">12</span></div></div>
+          <div style="flex:1;min-width:0">
+            <a class="qlink" style="font-size:15px;font-weight:600;line-height:1.35;display:block">Excel export drops cell formatting on multi-sheet questionnaires</a>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px">
+              <span style="display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:500;background:#F1EDFB;color:#61508C"><span style="width:6px;height:6px;border-radius:50%;background:#A084E8"></span>Security Questionnaires</span>
+              <span style="font-size:12px;color:#6B7280">by <b style="color:#4A5154;font-weight:600">Marcus Web</b> · 5h ago</span>
+              <span style="padding:2px 7px;border-radius:4px;font-size:11px;background:#F3F4F6;color:#6B7280">export</span>
+              <span style="padding:2px 7px;border-radius:4px;font-size:11px;background:#F3F4F6;color:#6B7280">excel</span>
+            </div>
+          </div>
+          <div style="flex:none;display:flex;align-items:center;gap:16px;color:#6B7280;font-size:12px;padding-top:3px">
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h12a1 1 0 011 1v7a1 1 0 01-1 1H8l-4 3V6a1 1 0 011-1z"></path></svg>5</span>
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>198</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;padding:15px 4px;border-bottom:1px solid #F0F2F3">
+          <div style="flex:none;width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:2px"><div style="display:flex;flex-direction:column;align-items:center;border:1px solid #FDE7EF;border-radius:6px;padding:4px 0;width:44px;background:#FFF5F9"><svg width="13" height="13" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="#E91E63"></path></svg><span style="font-size:13px;font-weight:700;color:#191D1F">6</span></div></div>
+          <div style="flex:1;min-width:0">
+            <a class="qlink" style="font-size:15px;font-weight:600;line-height:1.35;display:block">Copilot not citing sources from a specific Knowledge Hub folder</a>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px">
+              <span style="display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:500;background:#F1EDFB;color:#61508C"><span style="width:6px;height:6px;border-radius:50%;background:#A084E8"></span>AI Agents &amp; Copilot</span>
+              <span style="font-size:12px;color:#6B7280">by <b style="color:#4A5154;font-weight:600">Elena Ruiz</b> · 1d ago</span>
+              <span style="padding:2px 7px;border-radius:4px;font-size:11px;background:#F3F4F6;color:#6B7280">copilot</span>
+              <span style="padding:2px 7px;border-radius:4px;font-size:11px;background:#F3F4F6;color:#6B7280">citations</span>
+            </div>
+          </div>
+          <div style="flex:none;display:flex;align-items:center;gap:16px;color:#6B7280;font-size:12px;padding-top:3px">
+            <span style="display:inline-flex;align-items:center;gap:5px;color:#B37800;font-weight:600;background:#FFF8E1;padding:2px 8px;border-radius:9999px">Unanswered</span>
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>73</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;padding:15px 4px">
+          <div style="flex:none;width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:2px"><div style="display:flex;flex-direction:column;align-items:center;border:1px solid #E5E7EB;border-radius:6px;padding:4px 0;width:44px"><svg width="13" height="13" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="#9CA3AF"></path></svg><span style="font-size:13px;font-weight:700;color:#191D1F">18</span></div></div>
+          <div style="flex:1;min-width:0">
+            <a class="qlink" style="font-size:15px;font-weight:600;line-height:1.35;display:block">SSO login redirect loop after changing our Okta configuration</a>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px">
+              <span style="display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:500;background:#FFE9E9;color:#B4232C"><span style="width:6px;height:6px;border-radius:50%;background:#FF6969"></span>Account &amp; Billing</span>
+              <span style="font-size:12px;color:#6B7280">by <b style="color:#4A5154;font-weight:600">Tom Fields</b> · 2d ago</span>
+              <span style="padding:2px 7px;border-radius:4px;font-size:11px;background:#F3F4F6;color:#6B7280">sso</span>
+              <span style="padding:2px 7px;border-radius:4px;font-size:11px;background:#F3F4F6;color:#6B7280">okta</span>
+            </div>
+          </div>
+          <div style="flex:none;display:flex;align-items:center;gap:16px;color:#6B7280;font-size:12px;padding-top:3px">
+            <span style="display:inline-flex;align-items:center;gap:5px;color:#035E7B;font-weight:600"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#035E7B" stroke-width="2"><path d="M4 10l4 4 8-8"></path></svg>Verified</span>
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h12a1 1 0 011 1v7a1 1 0 01-1 1H8l-4 3V6a1 1 0 011-1z"></path></svg>6</span>
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>521</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============ 1b : Community cards ============ -->
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a><span><b>Community cards.</b> Roomy, avatar-forward cards with a soft gradient hero and centered search. A right rail of top contributors, popular tags and stats. Warmer, more social — accent colors hint each category.</span></div>
+<div class="dv-card" style="width:1080px">
+  <!-- header -->
+  <div style="height:60px;padding:0 24px;border-bottom:1px solid #E6E9EA;display:flex;align-items:center;gap:20px;background:#fff">
+    <div style="display:flex;align-items:center;gap:9px">
+      <img src="assets/inventive-mark.svg" width="26" height="26" alt="">
+      <span style="font-family:'Red Hat Display';font-weight:700;font-size:15px;color:#191D1F;letter-spacing:-.2px">Inventive AI <span style="color:#7C8588;font-weight:500">Community</span></span>
+    </div>
+    <nav style="display:flex;gap:4px;margin-left:14px">
+      <span style="padding:7px 12px;border-radius:6px;font-size:13px;font-weight:600;color:#035E7B;background:#E0EDF1">Ask &amp; Answer</span>
+      
+      
+    </nav>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:14px">
+      <svg width="19" height="19" viewBox="0 0 20 20" fill="none" stroke="#4A5154" stroke-width="1.6"><path d="M5 15V9a5 5 0 0110 0v6h1l-1 2H5l-1-2h1z"></path><path d="M8 17a2 2 0 004 0"></path></svg>
+      <div style="width:32px;height:32px;border-radius:50%;background:#047A9F;color:#fff;font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center">DR</div>
+    </div>
+  </div>
+  <!-- hero -->
+  <div style="padding:34px 32px 30px;background:linear-gradient(139deg,#E1DAF7 -30%,#FFF 60%);border-bottom:1px solid #EEF0F1;text-align:center">
+    <h1 style="margin:0 0 8px;font-family:'Red Hat Display';font-size:30px;font-weight:700;color:#191D1F;letter-spacing:-.5px">Ask &amp; Answer</h1>
+    <p style="margin:0 auto 18px;max-width:520px;font-size:14px;line-height:1.55;color:#4B5563">Share what's working, swap workflows, and get support from other Inventive AI teams. Ask a question, get answers, learn as you go.</p>
+    <div style="display:flex;gap:10px;justify-content:center;max-width:560px;margin:0 auto">
+      <div style="flex:1;position:relative">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#7C8588" stroke-width="1.7" style="position:absolute;left:12px;top:12px"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.5 13.5L17 17"></path></svg>
+        <input placeholder="Search questions, tags, or keywords…" style="width:100%;box-sizing:border-box;padding:11px 12px 11px 36px;font-size:14px;border:1px solid #D1D5DB;border-radius:8px;background:#fff;outline:none;font-family:'Figtree';box-shadow:0 1px 2px rgba(16,24,40,.05)">
+      </div>
+      <button style="font-family:'Figtree';font-weight:600;font-size:14px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:8px;padding:0 20px;cursor:pointer;white-space:nowrap;box-shadow:0 1px 2px rgba(16,24,40,.05)">Ask a Question</button>
+    </div>
+  </div>
+  <!-- body 3col -->
+  <div style="display:flex;background:#F9FBFB">
+    <aside style="width:210px;flex:none;padding:18px 12px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9CA3AF;padding:0 8px 8px">Spaces</div>
+      <div style="display:flex;flex-direction:column;gap:1px">
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;font-weight:600;color:#035E7B;background:#E0EDF1">All Questions<span style="margin-left:auto;color:#5D9AAD;font-weight:500">842</span></div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:8px;height:8px;border-radius:3px;background:#31A2DA"></span>Getting Started</div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:8px;height:8px;border-radius:3px;background:#FF8800"></span>RFP &amp; Proposals</div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:8px;height:8px;border-radius:3px;background:#A084E8"></span>Security Questionnaires</div>
+        
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154"><span style="width:8px;height:8px;border-radius:3px;background:#A084E8"></span>AI Agents &amp; Copilot</div>
+        
+      </div>
+    </aside>
+    <!-- feed -->
+    <div style="flex:1;min-width:0;padding:18px 18px;border-left:1px solid #EEF0F1;border-right:1px solid #EEF0F1;background:#fff">
+      <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px">
+        <div style="display:flex;gap:6px">
+          <span style="padding:6px 13px;border-radius:9999px;font-size:12px;font-weight:600;color:#fff;background:#047A9F">Trending</span>
+          <span style="padding:6px 13px;border-radius:9999px;font-size:12px;font-weight:500;color:#4A5154;background:#F3F5F6">New</span>
+          <span style="padding:6px 13px;border-radius:9999px;font-size:12px;font-weight:500;color:#4A5154;background:#F3F5F6">Unanswered</span>
+          <span style="padding:6px 13px;border-radius:9999px;font-size:12px;font-weight:500;color:#4A5154;background:#F3F5F6">Top</span>
+        </div>
+      </div>
+      <!-- card -->
+      <div style="border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin-bottom:12px;box-shadow:0 0 1px rgba(29,33,45,.2),0 1px 2px rgba(29,33,45,.06)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+          <div style="width:34px;height:34px;border-radius:50%;background:#FF8800;color:#fff;font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center">PN</div>
+          <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;color:#191D1F">Priya Nair</div><div style="font-size:11px;color:#9CA3AF">2h ago in <span style="color:#B45309;font-weight:500">RFP &amp; Proposals</span></div></div>
+          <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600;background:#E8F5E9;color:#2E7D39"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="#2E7D39" stroke-width="2.2"><path d="M4 10l4 4 8-8"></path></svg>Solved</span>
+        </div>
+        <a class="qlink" style="font-size:16px;font-weight:600;line-height:1.35;display:block;margin-bottom:6px">Draft generation stuck at “Analyzing knowledge base” for large RFPs</a>
+        <p style="margin:0 0 12px;font-size:13px;line-height:1.5;color:#6B7280">When I kick off a draft for a 120-question RFP the progress bar sits at the analyzing step for 10+ minutes. Smaller projects work fine…</p>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280">draft</span>
+          <span style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280">performance</span>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:14px;color:#6B7280;font-size:12px">
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="#047A9F"></path></svg><b style="color:#191D1F">24</b></span>
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h12a1 1 0 011 1v7a1 1 0 01-1 1H8l-4 3V6a1 1 0 011-1z"></path></svg>8</span>
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>412</span>
+          </div>
+        </div>
+      </div>
+      <div style="border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin-bottom:12px;box-shadow:0 0 1px rgba(29,33,45,.2),0 1px 2px rgba(29,33,45,.06)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+          <div style="width:34px;height:34px;border-radius:50%;background:#A084E8;color:#fff;font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center">MW</div>
+          <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;color:#191D1F">Marcus Web</div><div style="font-size:11px;color:#9CA3AF">5h ago in <span style="color:#61508C;font-weight:500">Security Questionnaires</span></div></div>
+        </div>
+        <a class="qlink" style="font-size:16px;font-weight:600;line-height:1.35;display:block;margin-bottom:6px">Excel export drops cell formatting on multi-sheet questionnaires</a>
+        <p style="margin:0 0 12px;font-size:13px;line-height:1.5;color:#6B7280">After exporting a completed CAIQ the merged header cells lose their fill color and borders. Is there a setting I'm missing?</p>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280">export</span>
+          <span style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280">excel</span>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:14px;color:#6B7280;font-size:12px">
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="#9CA3AF"></path></svg><b style="color:#191D1F">12</b></span>
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h12a1 1 0 011 1v7a1 1 0 01-1 1H8l-4 3V6a1 1 0 011-1z"></path></svg>5</span>
+            <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>198</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- right rail -->
+    <aside style="width:216px;flex:none;padding:18px 16px">
+      
+      
+    </aside>
+  </div>
+</div>
+</div>
+
+<!-- ============ 1c : Solved-forward ============ -->
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a><span><b>Solved-forward.</b> A teal hero with the mark motif and a big search. Cards carry a colored status spine (verified / community-solved / unanswered) and preview the accepted answer inline with a staff badge — built for customers who want the fix, fast.</span></div>
+<div class="dv-card" style="width:1080px">
+  <!-- teal hero header -->
+  <div style="background:linear-gradient(135deg,#04252F 0%,#035E7B 55%,#047A9F 100%);position:relative;overflow:hidden">
+    <img src="assets/inventive-mark.svg" width="360" height="360" alt="" style="position:absolute;right:-70px;top:-90px;opacity:.10">
+    <div style="height:58px;padding:0 24px;display:flex;align-items:center;gap:20px;position:relative;border-bottom:1px solid rgba(255,255,255,.12)">
+      <div style="display:flex;align-items:center;gap:9px">
+        <img src="assets/inventive-mark.svg" width="24" height="24" alt="">
+        <span style="font-family:'Red Hat Display';font-weight:700;font-size:15px;color:#fff;letter-spacing:-.2px">Inventive AI <span style="color:#B7D5DF;font-weight:500">Community</span></span>
+      </div>
+      <nav style="display:flex;gap:4px;margin-left:14px">
+        <span style="padding:6px 12px;border-radius:6px;font-size:13px;font-weight:600;color:#fff;background:rgba(255,255,255,.16)">Ask &amp; Answer</span>
+        
+        
+      </nav>
+      <div style="margin-left:auto;width:30px;height:30px;border-radius:50%;background:#F4BF96;color:#5A3A1A;font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center">DR</div>
+    </div>
+    <div style="padding:38px 32px 34px;position:relative;max-width:640px">
+      <h1 style="margin:0 0 10px;font-family:'Red Hat Display';font-size:34px;font-weight:700;color:#fff;letter-spacing:-.6px;line-height:1.05">Get unstuck.<br>Ask the community.</h1>
+      <p style="margin:0 0 20px;font-size:15px;line-height:1.55;color:#CFE3E9;max-width:480px">Hit a snag in Inventive AI? Search 800+ answered questions or ask your own — verified fixes from our team, plus workflows from teams like yours.</p>
+      <div style="display:flex;gap:10px;max-width:560px">
+        <div style="flex:1;position:relative">
+          <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="#7C8588" stroke-width="1.7" style="position:absolute;left:13px;top:14px"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.5 13.5L17 17"></path></svg>
+          <input placeholder="Describe your issue…" style="width:100%;box-sizing:border-box;padding:13px 12px 13px 38px;font-size:15px;border:none;border-radius:9px;background:#fff;outline:none;font-family:'Figtree';box-shadow:0 6px 18px rgba(4,37,47,.28)">
+        </div>
+        <button style="font-family:'Figtree';font-weight:600;font-size:15px;color:#035E7B;background:#fff;border:none;border-radius:9px;padding:0 22px;cursor:pointer;white-space:nowrap;box-shadow:0 6px 18px rgba(4,37,47,.28)">Ask a Question</button>
+      </div>
+    </div>
+  </div>
+  <!-- body -->
+  <div style="display:flex;background:#F9FBFB">
+    <aside style="width:196px;flex:none;padding:18px 12px;border-right:1px solid #EEF0F1">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9CA3AF;padding:0 8px 8px">Browse</div>
+      <div style="display:flex;flex-direction:column;gap:1px">
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;font-weight:600;color:#035E7B;background:#E0EDF1">All Questions</div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154">Getting Started</div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154">RFP &amp; Proposals</div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154">Security Questionnaires</div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154">Knowledge Hub</div>
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;color:#4A5154">AI Agents &amp; Copilot</div>
+        
+      </div>
+    </aside>
+    <div style="flex:1;min-width:0;padding:20px 24px 26px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+        <span style="padding:6px 13px;border-radius:6px;font-size:12px;font-weight:600;color:#fff;background:#047A9F">Trending</span>
+        <span style="padding:6px 13px;border-radius:6px;font-size:12px;font-weight:500;color:#4A5154;border:1px solid #E5E7EB">New</span>
+        <span style="padding:6px 13px;border-radius:6px;font-size:12px;font-weight:500;color:#4A5154;border:1px solid #E5E7EB">Unanswered</span>
+        <span style="padding:6px 13px;border-radius:6px;font-size:12px;font-weight:500;color:#4A5154;border:1px solid #E5E7EB">Top</span>
+      </div>
+      <!-- card verified -->
+      <div style="display:flex;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;margin-bottom:12px;background:#fff;box-shadow:0 0 1px rgba(29,33,45,.2),0 1px 2px rgba(29,33,45,.06)">
+        <div style="width:8px;flex:none;background:#047A9F"></div>
+        <div style="flex:1;min-width:0;padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:9999px;font-size:11px;font-weight:600;background:#E0EDF1;color:#035E7B"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="#035E7B" stroke-width="2.2"><path d="M4 10l4 4 8-8"></path></svg>Staff Verified</span>
+            <span style="font-size:12px;color:#9CA3AF">RFP &amp; Proposals · 2h ago</span>
+          </div>
+          <a class="qlink" style="font-size:17px;font-weight:700;line-height:1.3;display:block;font-family:'Red Hat Display';letter-spacing:-.2px">Draft generation stuck at “Analyzing knowledge base” for large RFPs</a>
+          <!-- accepted answer preview -->
+          <div style="margin-top:12px;background:#F5FAFB;border:1px solid #DCEBEF;border-radius:8px;padding:12px 14px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <div style="width:22px;height:22px;border-radius:50%;background:#047A9F;color:#fff;font-weight:600;font-size:10px;display:flex;align-items:center;justify-content:center">DR</div>
+              <span style="font-size:12px;font-weight:600;color:#191D1F">Dana Ruiz</span>
+              <span style="padding:1px 7px;border-radius:9999px;font-size:10px;font-weight:600;background:linear-gradient(90deg,#F1EDFB,#FFEEE7);color:#61508C">Inventive Staff</span>
+            </div>
+            <p style="margin:0;font-size:13px;line-height:1.5;color:#4B5563">This happens when a large batch re-indexes mid-draft. Pause the sync under <b style="color:#191D1F">Knowledge Hub → Indexing</b>, then restart the draft — it'll resume in under a minute.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <span style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280">draft</span>
+            <span style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280">performance</span>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:14px;color:#6B7280;font-size:12px">
+              <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="#047A9F"></path></svg><b style="color:#191D1F">24</b></span>
+              <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h12a1 1 0 011 1v7a1 1 0 01-1 1H8l-4 3V6a1 1 0 011-1z"></path></svg>8</span>
+              <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>412</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- card community solved -->
+      <div style="display:flex;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;margin-bottom:12px;background:#fff;box-shadow:0 0 1px rgba(29,33,45,.2),0 1px 2px rgba(29,33,45,.06)">
+        <div style="width:8px;flex:none;background:#4CAF59"></div>
+        <div style="flex:1;min-width:0;padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:9999px;font-size:11px;font-weight:600;background:#E8F5E9;color:#2E7D39"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="#2E7D39" stroke-width="2.2"><path d="M4 10l4 4 8-8"></path></svg>Community Solved</span>
+            <span style="font-size:12px;color:#9CA3AF">Knowledge Hub · 6h ago</span>
+          </div>
+          <a class="qlink" style="font-size:17px;font-weight:700;line-height:1.3;display:block;font-family:'Red Hat Display';letter-spacing:-.2px">How do I re-index a document after updating it in Knowledge Hub?</a>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <span style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280">indexing</span>
+            <span style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280">knowledge-hub</span>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:14px;color:#6B7280;font-size:12px">
+              <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="#4CAF59"></path></svg><b style="color:#191D1F">9</b></span>
+              <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h12a1 1 0 011 1v7a1 1 0 01-1 1H8l-4 3V6a1 1 0 011-1z"></path></svg>3</span>
+              <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>140</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- card unanswered -->
+      <div style="display:flex;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 0 1px rgba(29,33,45,.2),0 1px 2px rgba(29,33,45,.06)">
+        <div style="width:8px;flex:none;background:#FFC107"></div>
+        <div style="flex:1;min-width:0;padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:9999px;font-size:11px;font-weight:600;background:#FFF8E1;color:#B37800">Awaiting Answer</span>
+            <span style="font-size:12px;color:#9CA3AF">AI Agents &amp; Copilot · 1d ago</span>
+          </div>
+          <a class="qlink" style="font-size:17px;font-weight:700;line-height:1.3;display:block;font-family:'Red Hat Display';letter-spacing:-.2px">Copilot not citing sources from a specific Knowledge Hub folder</a>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <span style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280">copilot</span>
+            <span style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280">citations</span>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:14px;color:#6B7280;font-size:12px">
+              <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="#9CA3AF"></path></svg><b style="color:#191D1F">6</b></span>
+              <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h12a1 1 0 011 1v7a1 1 0 01-1 1H8l-4 3V6a1 1 0 011-1z"></path></svg>0</span>
+              <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>73</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: “build out <a class="dv-oid" href="#1c">1c</a> as the full interactive prototype” · “mix <a class="dv-oid" href="#1a">1a</a>'s dense rows with <a class="dv-oid" href="#1c">1c</a>'s status spine” · “show the question-detail page for <a class="dv-oid" href="#1b">1b</a>”</p>
+</section>
+
+</x-dc>
+</body>
+</html>

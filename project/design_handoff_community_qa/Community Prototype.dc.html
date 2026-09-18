@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&amp;family=Red+Hat+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/inventive-ai-design-system-6f2f885b-3723-4521-a6d7-70c85f249cec/colors_and_type.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#EEF0F1;font-family:'Figtree',system-ui,sans-serif;color:#191D1F}
+  a{color:#047A9F;text-decoration:none}
+  a:hover{color:#035E7B}
+  input,textarea,select,button{font-family:'Figtree',sans-serif}
+  ::placeholder{color:#9CA3AF}
+  .rhd{font-family:'Red Hat Display',sans-serif}
+  @keyframes skq{0%{background-position:100% 0}100%{background-position:-100% 0}}
+  .skel{background:linear-gradient(90deg,#EEF0F1 25%,#E2E6E8 50%,#EEF0F1 75%);background-size:200% 100%;animation:skq 1.2s ease-in-out infinite;border-radius:6px}
+</style>
+</helmet>
+
+<div style="min-height:100vh;padding-bottom:64px;margin:0 auto;background:#EEF0F1;max-width: {{ frameMax }};border: {{ frameBorder }};border-radius: {{ frameRadius }};overflow:hidden;box-shadow: {{ frameShadow }}">
+
+  <!-- ===== DESKTOP HEADER ===== -->
+  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <header data-behavior="Persistent top nav on all authed screens" style="height:60px;padding:0 24px;border-bottom:1px solid #E6E9EA;display:flex;align-items:center;gap:16px;background:#fff;position:sticky;top:0;z-index:20">
+    <div onClick="{{ goHome }}" data-behavior="Logo -&gt; community homepage" style="display:flex;align-items:center;gap:9px;cursor:pointer">
+      <img src="assets/inventive-mark.svg" width="26" height="26" alt="">
+      <span class="rhd" style="font-weight:700;font-size:15px;letter-spacing:-.2px">Inventive AI <span style="color:#7C8588;font-weight:500">Community</span></span>
+    </div>
+    <nav style="display:flex;gap:2px;margin-left:10px">
+      <span onClick="{{ goFeed }}" data-behavior="-&gt; question listing" style="padding:7px 11px;border-radius:6px;font-size:13px;cursor:pointer;font-weight: {{ navFeedW }};color: {{ navFeedC }};background: {{ navFeedBg }}">Ask &amp; Answer</span>
+      
+      
+    </nav>
+    <div style="flex:1;max-width:260px;margin-left:auto;position:relative">
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="#7C8588" stroke-width="1.7" style="position:absolute;left:10px;top:9px"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.5 13.5L17 17"></path></svg>
+      <input value="{{ search }}" onInput="{{ onSearch }}" onKeyDown="{{ onSearchKey }}" data-behavior="Enter -&gt; search results page" placeholder="Search questions…" style="width:100%;padding:8px 10px 8px 31px;font-size:13px;border:1px solid #E5E7EB;border-radius:6px;background:#F9FBFB;outline:none">
+    </div>
+    <button onClick="{{ goAsk }}" data-behavior="-&gt; Ask Question flow" style="font-weight:600;font-size:13px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:6px;padding:8px 14px;cursor:pointer;white-space:nowrap">Ask a Question</button>
+    <div onClick="{{ goNotifs }}" data-behavior="-&gt; notifications" style="position:relative;cursor:pointer;flex:none">
+      <svg width="19" height="19" viewBox="0 0 20 20" fill="none" stroke="#4A5154" stroke-width="1.6"><path d="M5 15V9a5 5 0 0110 0v6h1l-1 2H5l-1-2h1z"></path><path d="M8 17a2 2 0 004 0"></path></svg>
+      <sc-if value="{{ hasUnread }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;top:-3px;right:-3px;min-width:14px;height:14px;padding:0 3px;border-radius:9999px;background:#E91E63;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ unreadCount }}</span></sc-if>
+    </div>
+    <div onClick="{{ onProfileClick }}" data-behavior="-&gt; your profile" title="{{ meName }}" style="width:32px;height:32px;border-radius:50%;background:#FF8800;color:#fff;font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer">{{ meInitials }}</div>
+  </header>
+  </sc-if>
+
+  <!-- ===== MOBILE HEADER ===== -->
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <header style="height:54px;padding:0 14px;border-bottom:1px solid #E6E9EA;display:flex;align-items:center;gap:10px;background:#fff;position:sticky;top:0;z-index:20">
+    <svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="#4A5154" stroke-width="1.7"><path d="M3 6h14M3 10h14M3 14h14"></path></svg>
+    <div onClick="{{ goHome }}" style="display:flex;align-items:center;gap:7px;cursor:pointer"><img src="assets/inventive-mark.svg" width="24" height="24" alt=""><span class="rhd" style="font-weight:700;font-size:14px">Community</span></div>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+      <svg onClick="{{ goSearchTop }}" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#4A5154" stroke-width="1.7"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.5 13.5L17 17"></path></svg>
+      <div onClick="{{ onProfileClick }}" style="width:28px;height:28px;border-radius:50%;background:#FF8800;color:#fff;font-weight:600;font-size:11px;display:flex;align-items:center;justify-content:center">{{ meInitials }}</div>
+    </div>
+  </header>
+  </sc-if>
+
+  <!-- ===== FEED / LISTING ===== -->
+  <sc-if value="{{ isFeed }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="position:relative;overflow:hidden;background: {{ heroBg }};border-bottom:1px solid #E6E9EA">
+      <sc-if value="{{ heroDark }}" hint-placeholder-val="{{ true }}"><img src="assets/inventive-mark.svg" width="360" height="360" alt="" style="position:absolute;right:-70px;top:-100px;opacity:.09"></sc-if>
+      <div style="max-width: {{ wrapMax }};margin:0 auto;padding: {{ heroPad }};position:relative;text-align:center">
+        <h1 class="rhd" style="margin:0 0 9px;font-size: {{ h1Size }};font-weight:700;letter-spacing:-.5px;color: {{ heroTitle }}">Ask &amp; Answer</h1>
+        <p style="margin:0 auto 20px;max-width:540px;font-size:15px;line-height:1.55;color: {{ heroSub }}">Search answered questions from the Inventive AI community, or ask your own and get help from other teams and staff.</p>
+        <div style="display:flex;gap:10px;justify-content:center;max-width:580px;margin:0 auto">
+          <div style="flex:1;position:relative">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#7C8588" stroke-width="1.7" style="position:absolute;left:12px;top:13px"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.5 13.5L17 17"></path></svg>
+            <input value="{{ search }}" onInput="{{ onSearch }}" onKeyDown="{{ onSearchKey }}" data-behavior="Enter -&gt; search results" placeholder="Search the community&hellip;" style="width:100%;padding:12px 12px 12px 37px;font-size:14px;border:1px solid #D1D5DB;border-radius:8px;background:#fff;outline:none;box-shadow:0 2px 8px rgba(16,24,40,.08)">
+          </div>
+          <button onClick="{{ goAsk }}" data-behavior="-&gt; Ask Question flow" style="font-weight:600;font-size:14px;color: {{ heroBtnFg }};background: {{ heroBtnBg }};border:none;border-radius:8px;padding:0 20px;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(16,24,40,.12)">Ask a Question</button>
+        </div>
+      </div>
+    </div>
+  <div style="max-width: {{ wrapMax }};margin:0 auto;padding:22px 24px 40px;display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap">
+    <sc-if value="{{ showSidebar }}" hint-placeholder-val="{{ true }}">
+    <aside style="width:206px;flex:none">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9CA3AF;padding:0 8px 8px">Spaces</div>
+      <div style="display:flex;flex-direction:column;gap:1px">
+        <sc-for list="{{ sidebar }}" as="c" hint-placeholder-count="8">
+          <div onClick="{{ c.onClick }}" data-behavior="filter listing / open category" style="display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;font-size:13px;cursor:pointer;font-weight: {{ c.weight }};background: {{ c.bg }};color: {{ c.fg }}"><span style="width:8px;height:8px;border-radius:3px;flex:none;background: {{ c.dot }}"></span><span style="flex:1;min-width:0">{{ c.name }}</span><span style="color: {{ c.countFg }};font-weight:500">{{ c.count }}</span></div>
+        </sc-for>
+      </div>
+    </aside>
+    </sc-if>
+    <div style="flex:1;min-width:280px">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:12px"><span style="font-size:13px;color:#6B7280;font-weight:600">{{ resultCount }} questions</span></div>
+      <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
+        <sc-for list="{{ sortTabs }}" as="t" hint-placeholder-count="4"><span onClick="{{ t.onClick }}" data-behavior="re-sort listing" style="padding:6px 13px;border-radius:9999px;font-size:12px;cursor:pointer;font-weight:600;background: {{ t.bg }};color: {{ t.fg }}">{{ t.label }}</span></sc-for>
+      </div>
+      <sc-if value="{{ tagActive }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:13px;color:#4B5563">Filtered by <span style="padding:3px 9px;border-radius:6px;background:#E0EDF1;color:#035E7B;font-weight:600">#{{ tag }}</span><span onClick="{{ clearTag }}" data-behavior="clear tag filter" style="cursor:pointer;color:#9CA3AF">clear ×</span></div></sc-if>
+
+      <!-- LOADING -->
+      <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ skeletons }}" as="s" hint-placeholder-count="5">
+            <div style="border:1px solid #E5E7EB;border-radius:8px;padding:15px 17px;background:#fff"><div style="display:flex;gap:10px;margin-bottom:10px"><div class="skel" style="width:32px;height:32px;border-radius:50%"></div><div style="flex:1"><div class="skel" style="width:120px;height:11px;margin-bottom:6px"></div><div class="skel" style="width:80px;height:9px"></div></div></div><div class="skel" style="width:75%;height:15px;margin-bottom:8px"></div><div class="skel" style="width:100%;height:11px;margin-bottom:5px"></div><div class="skel" style="width:60%;height:11px"></div></div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- ERROR -->
+      <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:48px 20px;border:1px solid #F5D6E1;border-radius:10px;background:#FDF2F6">
+          <div style="width:44px;height:44px;border-radius:50%;background:#FCE4EC;display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="#C2185B" stroke-width="1.8"><path d="M10 6v5M10 14h.01"></path><circle cx="10" cy="10" r="7.5"></circle></svg></div>
+          <div style="font-size:15px;font-weight:600;margin-bottom:4px">Couldn't load questions</div>
+          <p style="margin:0 0 16px;font-size:13px;color:#6B7280">Something went wrong on our end. Check your connection and try again.</p>
+          <button onClick="{{ retry }}" data-behavior="re-fetch listing" style="font-weight:600;font-size:13px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:6px;padding:8px 18px;cursor:pointer">Retry</button>
+        </div>
+      </sc-if>
+
+      <!-- EMPTY -->
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:44px 20px;border:1px dashed #D1D5DB;border-radius:10px;background:#fff">
+          <img src="assets/not-found.svg" width="120" alt="" style="opacity:.9">
+          <div style="font-size:15px;font-weight:600;margin:14px 0 4px">No questions here yet</div>
+          <p style="margin:0 auto 16px;max-width:340px;font-size:13px;color:#6B7280">Nothing matches this view. Be the first to start the conversation.</p>
+          <button onClick="{{ goAsk }}" data-behavior="-&gt; Ask Question flow" style="font-weight:600;font-size:13px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:6px;padding:8px 18px;cursor:pointer">Ask a Question</button>
+        </div>
+      </sc-if>
+
+      <!-- READY -->
+      <sc-if value="{{ isReady }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{ questions }}" as="q" hint-placeholder-count="4">
+          <div style="display:flex;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 0 1px rgba(29,33,45,.2),0 1px 2px rgba(29,33,45,.06)" style-hover="box-shadow:0 0 1px rgba(29,33,45,.25),0 4px 10px rgba(29,33,45,.1)">
+            <sc-if value="{{ spineShow }}" hint-placeholder-val="{{ true }}"><div style="width:7px;flex:none;background: {{ q.spine }}"></div></sc-if>
+            <div style="flex:1;min-width:0;padding:15px 17px">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
+                <div onClick="{{ q.onAuthor }}" data-behavior="-&gt; author profile" style="width:32px;height:32px;border-radius:50%;color:#fff;font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer;background: {{ q.author.tone }}">{{ q.author.initials }}</div>
+                <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">{{ q.author.name }}</div><div style="font-size:11px;color:#9CA3AF">{{ q.time }} in <span style="font-weight:500;color: {{ q.catFg }}">{{ q.catName }}</span></div></div>
+                <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600;background: {{ q.statusBg }};color: {{ q.statusFg }}"><sc-if value="{{ q.statusCheck }}" hint-placeholder-val="{{ true }}"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10l4 4 8-8"></path></svg></sc-if>{{ q.statusLabel }}</span>
+                <svg onClick="{{ q.onReport }}" data-behavior="opens overflow menu (Report / Share / Follow)" width="18" height="18" viewBox="0 0 20 20" style="cursor:pointer;flex:none"><circle cx="5" cy="10" r="1.4" fill="#9CA3AF"></circle><circle cx="10" cy="10" r="1.4" fill="#9CA3AF"></circle><circle cx="15" cy="10" r="1.4" fill="#9CA3AF"></circle></svg>
+              </div>
+              <a onClick="{{ q.onOpen }}" data-behavior="-&gt; question detail" class="qtitle" style="font-size:16px;font-weight:600;line-height:1.35;display:block;margin-bottom:6px;color:#191D1F;cursor:pointer" style-hover="color:#047A9F">{{ q.title }}</a>
+              <p style="margin:0;font-size:13px;line-height:1.5;color:#6B7280">{{ q.snippet }}</p>
+              <sc-if value="{{ q.hasAccepted }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:11px;background:#F5FAFB;border:1px solid #DCEBEF;border-radius:8px;padding:11px 13px">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:20px;height:20px;border-radius:50%;color:#fff;font-weight:600;font-size:9px;display:flex;align-items:center;justify-content:center;background: {{ q.accepted.tone }}">{{ q.accepted.initials }}</div><span style="font-size:12px;font-weight:600">{{ q.accepted.name }}</span><sc-if value="{{ q.accepted.isStaff }}" hint-placeholder-val="{{ true }}"><span style="padding:1px 7px;border-radius:9999px;font-size:10px;font-weight:600;background:linear-gradient(90deg,#F1EDFB,#FFEEE7);color:#61508C">Inventive Staff</span></sc-if></div>
+                  <p style="margin:0;font-size:12.5px;line-height:1.5;color:#4B5563">{{ q.accepted.body }}</p>
+                </div>
+              </sc-if>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:11px">
+                <sc-for list="{{ q.tags }}" as="tg" hint-placeholder-count="2"><span onClick="{{ tg.onClick }}" data-behavior="filter listing by tag" style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280;cursor:pointer" style-hover="background:#E5E7EB">{{ tg.name }}</span></sc-for>
+                <div style="margin-left:auto;display:flex;align-items:center;gap:13px;color:#6B7280;font-size:12px">
+                  <button onClick="{{ q.onVote }}" data-behavior="toggles your upvote (optimistic)" style="display:inline-flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;font-size:12px;font-weight:600;padding:0;color: {{ q.voteColor }}"><svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="currentColor"></path></svg>{{ q.votes }}</button>
+                  <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h12a1 1 0 011 1v7a1 1 0 01-1 1H8l-4 3V6a1 1 0 011-1z"></path></svg>{{ q.replies }}</span>
+                  <span style="display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>{{ q.views }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ showRail }}" hint-placeholder-val="{{ true }}">
+    <aside style="width:214px;flex:none">
+      <div style="border:1px solid #E5E7EB;border-radius:8px;padding:14px;background:#fff;margin-bottom:14px"><div style="font-size:12px;font-weight:700;margin-bottom:11px">Top Contributors</div><div style="display:flex;flex-direction:column;gap:11px"><sc-for list="{{ contributors }}" as="p" hint-placeholder-count="3"><div onClick="{{ p.onClick }}" data-behavior="-&gt; user profile" style="display:flex;align-items:center;gap:9px;cursor:pointer"><div style="width:28px;height:28px;border-radius:50%;color:#fff;font-weight:600;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none;background: {{ p.tone }}">{{ p.initials }}</div><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600">{{ p.name }}</div><div style="font-size:10px;color:#9CA3AF">{{ p.role }}</div></div><span style="font-size:11px;font-weight:600;color:#047A9F">{{ p.rep }}</span></div></sc-for></div></div>
+      <div style="border:1px solid #E5E7EB;border-radius:8px;padding:14px;background:#fff"><div style="font-size:12px;font-weight:700;margin-bottom:11px">Popular Tags</div><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ popularTags }}" as="tg" hint-placeholder-count="6"><span onClick="{{ tg.onClick }}" data-behavior="filter listing by tag" style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#4A5154;cursor:pointer" style-hover="background:#E0EDF1;color:#035E7B">{{ tg.name }}</span></sc-for></div></div>
+    </aside>
+    </sc-if>
+  </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== DETAIL ===== -->
+  <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:900px;margin:0 auto;padding:22px 24px 48px">
+    <div onClick="{{ goFeed }}" data-behavior="-&gt; back to listing" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#6B7280;cursor:pointer;margin-bottom:16px" style-hover="color:#047A9F"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5l-5 5 5 5"></path></svg>Back to Ask &amp; Answer</div>
+    <div style="display:flex;border:1px solid #E5E7EB;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 0 1px rgba(29,33,45,.2),0 2px 4px rgba(29,33,45,.08)">
+      <sc-if value="{{ spineShow }}" hint-placeholder-val="{{ true }}"><div style="width:7px;flex:none;background: {{ cur.spine }}"></div></sc-if>
+      <div style="flex:1;min-width:0;padding:24px 26px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600;background: {{ cur.statusBg }};color: {{ cur.statusFg }}"><sc-if value="{{ cur.statusCheck }}" hint-placeholder-val="{{ true }}"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10l4 4 8-8"></path></svg></sc-if>{{ cur.statusLabel }}</span><span style="font-size:12px;font-weight:500;color: {{ cur.catFg }}">{{ cur.catName }}</span><svg onClick="{{ cur.onReport }}" data-behavior="opens overflow menu -&gt; Report flow" width="18" height="18" viewBox="0 0 20 20" style="cursor:pointer;margin-left:auto;flex:none"><circle cx="5" cy="10" r="1.4" fill="#9CA3AF"></circle><circle cx="10" cy="10" r="1.4" fill="#9CA3AF"></circle><circle cx="15" cy="10" r="1.4" fill="#9CA3AF"></circle></svg></div>
+        <h1 class="rhd" style="margin:0 0 14px;font-size:24px;font-weight:700;line-height:1.25;letter-spacing:-.3px">{{ cur.title }}</h1>
+        <div style="display:flex;align-items:center;gap:16px;padding-bottom:16px;border-bottom:1px solid #F0F2F3;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:9px"><div onClick="{{ cur.onAuthor }}" data-behavior="-&gt; author profile" style="width:34px;height:34px;border-radius:50%;color:#fff;font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;background: {{ cur.author.tone }}">{{ cur.author.initials }}</div><div><div style="font-size:13px;font-weight:600">{{ cur.author.name }}</div><div style="font-size:11px;color:#9CA3AF">Asked {{ cur.time }}</div></div></div>
+          <button onClick="{{ toggleFollow }}" data-behavior="toggles follow state on this question" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid {{ followBorder }};background: {{ followBg }};color: {{ followFg }}">{{ followLabel }}</button>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:14px;color:#6B7280;font-size:13px"><button onClick="{{ cur.onVote }}" data-behavior="toggles your upvote" style="display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid #E5E7EB;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px;font-weight:600;color: {{ cur.voteColor }}"><svg width="15" height="15" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="currentColor"></path></svg>{{ cur.votes }}</button><span style="display:inline-flex;align-items:center;gap:5px"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"></path><circle cx="10" cy="10" r="2.2"></circle></svg>{{ cur.views }}</span></div>
+        </div>
+        <div style="padding:16px 0 4px;font-size:14px;line-height:1.65;color:#374151">{{ cur.body }}</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><sc-for list="{{ cur.tags }}" as="tg" hint-placeholder-count="2"><span onClick="{{ tg.onClick }}" data-behavior="filter listing by tag" style="padding:3px 9px;border-radius:6px;font-size:11px;background:#F3F4F6;color:#6B7280;cursor:pointer">{{ tg.name }}</span></sc-for></div>
+        <!-- comments -->
+        <div style="margin-top:16px;padding-top:12px;border-top:1px dashed #E5E7EB">
+          <sc-for list="{{ cur.comments }}" as="c" hint-placeholder-count="2"><div style="font-size:12px;color:#4B5563;padding:5px 0"><b style="color:#191D1F">{{ c.author }}</b> {{ c.body }} <span style="color:#9CA3AF">· {{ c.time }}</span></div></sc-for>
+          <div style="display:flex;gap:8px;margin-top:6px"><input placeholder="Add a comment…" data-behavior="submit -&gt; adds a comment (POST)" style="flex:1;padding:7px 10px;font-size:12px;border:1px solid #E5E7EB;border-radius:6px;background:#F9FBFB;outline:none"><button data-behavior="adds comment" style="font-size:12px;font-weight:600;color:#047A9F;background:none;border:none;cursor:pointer">Comment</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;margin:26px 0 14px"><h2 class="rhd" style="margin:0;font-size:16px;font-weight:700">{{ cur.replies }} Answers</h2><span style="margin-left:auto;font-size:12px;color:#6B7280">Sorted by votes</span></div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <sc-for list="{{ cur.answers }}" as="a" hint-placeholder-count="2">
+        <div style="border:1px solid {{ a.borderColor }};border-radius:10px;padding:18px 20px;background: {{ a.bg }}">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div onClick="{{ a.onAuthor }}" data-behavior="-&gt; author profile" style="width:32px;height:32px;border-radius:50%;color:#fff;font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer;background: {{ a.tone }}">{{ a.initials }}</div><div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:7px"><span style="font-size:13px;font-weight:600">{{ a.name }}</span><sc-if value="{{ a.isStaff }}" hint-placeholder-val="{{ true }}"><span style="padding:1px 7px;border-radius:9999px;font-size:10px;font-weight:600;background:linear-gradient(90deg,#F1EDFB,#FFEEE7);color:#61508C">Inventive Staff</span></sc-if></div><div style="font-size:11px;color:#9CA3AF">{{ a.time }}</div></div><sc-if value="{{ a.accepted }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600;background: {{ a.acceptBg }};color: {{ a.acceptFg }}"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10l4 4 8-8"></path></svg>{{ a.acceptLabel }}</span></sc-if></div>
+          <p style="margin:0 0 12px;font-size:13.5px;line-height:1.6;color:#374151">{{ a.body }}</p>
+          <div style="display:flex;align-items:center;gap:14px"><button onClick="{{ a.onVote }}" data-behavior="toggles your upvote on this answer" style="display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid #E5E7EB;border-radius:8px;padding:5px 11px;cursor:pointer;font-size:12px;font-weight:600;color: {{ a.voteColor }}"><svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 4l6 8H4z" fill="currentColor"></path></svg>{{ a.votes }}</button><span data-behavior="reply -&gt; adds a comment on this answer" style="font-size:12px;color:#6B7280;cursor:pointer">Comment</span><span onClick="{{ a.onReport }}" data-behavior="-&gt; Report flow" style="font-size:12px;color:#9CA3AF;cursor:pointer">Report</span></div>
+        </div>
+      </sc-for>
+      <sc-if value="{{ cur.noAnswers }}" hint-placeholder-val="{{ false }}"><div style="text-align:center;padding:30px 20px;border:1px dashed #D1D5DB;border-radius:10px;color:#9CA3AF;font-size:13px">No answers yet. Be the first to help.</div></sc-if>
+    </div>
+
+    <div style="margin-top:22px;border:1px solid #E5E7EB;border-radius:10px;padding:18px 20px;background:#fff"><div style="font-size:14px;font-weight:600;margin-bottom:10px">Your Answer</div><textarea placeholder="Share how you solved this, or add detail that helps others…" style="width:100%;min-height:96px;padding:12px;font-size:13px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;resize:vertical;line-height:1.5"></textarea><div style="display:flex;justify-content:flex-end;margin-top:10px"><button data-behavior="submit -&gt; adds an answer (POST), appears in list" style="font-weight:600;font-size:13px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:6px;padding:8px 16px;cursor:pointer">Post Answer</button></div></div>
+  </div>
+  </sc-if>
+
+  <!-- ===== ASK ===== -->
+  <sc-if value="{{ isAsk }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1000px;margin:0 auto;padding:22px 24px 48px;display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">
+    <div style="flex:1;min-width:300px">
+      <div onClick="{{ goFeed }}" data-behavior="discards draft -&gt; back to listing" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#6B7280;cursor:pointer;margin-bottom:14px" style-hover="color:#047A9F"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5l-5 5 5 5"></path></svg>Cancel</div>
+      <h1 class="rhd" style="margin:0 0 20px;font-size:24px;font-weight:700;letter-spacing:-.3px">Ask a Question</h1>
+      <div style="border:1px solid #E5E7EB;border-radius:10px;padding:22px;background:#fff;box-shadow:0 0 1px rgba(29,33,45,.2),0 2px 4px rgba(29,33,45,.08)">
+        <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Title</label>
+        <input data-behavior="required; live similar-question suggestions fire on blur" placeholder="Summarize your issue in one line" style="width:100%;padding:10px 12px;font-size:14px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;margin-bottom:6px">
+        <div style="font-size:11px;color:#9CA3AF;margin-bottom:18px">Be specific. Imagine you're asking another Inventive AI admin.</div>
+        <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Category <span style="color:#E91E63">*</span></label>
+        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px"><sc-for list="{{ askCats }}" as="c" hint-placeholder-count="7"><span onClick="{{ c.onClick }}" data-behavior="selects category (required)" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:9999px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid {{ c.border }};background: {{ c.bg }};color: {{ c.fg }}"><span style="width:7px;height:7px;border-radius:50%;background: {{ c.dot }}"></span>{{ c.name }}</span></sc-for></div>
+        <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Details</label>
+        <textarea data-behavior="rich text in production (markdown/TipTap)" placeholder="Describe what you expected, what happened, and any steps to reproduce. Mention your project type if relevant." style="width:100%;min-height:150px;padding:12px;font-size:13px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;resize:vertical;line-height:1.6;margin-bottom:18px"></textarea>
+        <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Tags</label>
+        <input data-behavior="up to 5 tags, autocomplete from existing tags" placeholder="Add up to 5 tags, e.g. export, excel, api" style="width:100%;padding:10px 12px;font-size:14px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;margin-bottom:20px">
+        <div style="display:flex;justify-content:flex-end;gap:10px"><button onClick="{{ goFeed }}" data-behavior="discard" style="font-weight:600;font-size:13px;color:#323739;background:linear-gradient(180deg,#fff -75%,#f3f4f6 100%);border:1px solid #E5E7EB;border-radius:6px;padding:9px 16px;cursor:pointer">Cancel</button><button onClick="{{ submitAsk }}" data-behavior="validate -&gt; POST question -&gt; redirect to its detail" style="font-weight:600;font-size:13px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:6px;padding:9px 18px;cursor:pointer">Post Question</button></div>
+      </div>
+    </div>
+    <aside style="width:250px;flex:none"><div style="border:1px solid #E5E7EB;border-radius:10px;padding:16px;background:linear-gradient(139deg,#E1DAF7 -30%,#FFF 70%)"><div style="font-size:13px;font-weight:700;margin-bottom:10px">Writing a good question</div><ul style="margin:0;padding-left:18px;font-size:12.5px;line-height:1.7;color:#4B5563"><li>Say what you expected vs. what happened</li><li>Include your project type (Q&amp;A, MFQ, Proposal)</li><li>Add exact error text if you have it</li><li>Tag it so the right people see it</li></ul></div></aside>
+  </div>
+  </sc-if>
+
+  <!-- ===== SEARCH ===== -->
+  <sc-if value="{{ isSearch }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:900px;margin:0 auto;padding:22px 24px 48px">
+    <div style="position:relative;margin-bottom:18px"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="#7C8588" stroke-width="1.7" style="position:absolute;left:13px;top:13px"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.5 13.5L17 17"></path></svg><input value="{{ search }}" onInput="{{ onSearch }}" onKeyDown="{{ onSearchKey }}" data-behavior="live search; Enter re-queries" placeholder="Search the community…" style="width:100%;padding:12px 12px 12px 38px;font-size:15px;border:1px solid #D1D5DB;border-radius:9px;background:#fff;outline:none"></div>
+    <div style="font-size:13px;color:#6B7280;margin-bottom:16px">{{ resultCount }} results for “<b style="color:#191D1F">{{ search }}</b>”</div>
+    <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}"><div style="text-align:center;padding:44px 20px;border:1px dashed #D1D5DB;border-radius:10px;background:#fff"><img src="assets/not-found.svg" width="120" alt="" style="opacity:.9"><div style="font-size:15px;font-weight:600;margin:14px 0 4px">No results for that search</div><p style="margin:0 auto 16px;max-width:340px;font-size:13px;color:#6B7280">Try different keywords, or ask the community.</p><button onClick="{{ goAsk }}" data-behavior="-&gt; Ask Question flow" style="font-weight:600;font-size:13px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:6px;padding:8px 18px;cursor:pointer">Ask a Question</button></div></sc-if>
+    <sc-if value="{{ hasTagMatches }}" hint-placeholder-val="{{ false }}"><div style="margin-bottom:18px"><div style="font-size:12px;font-weight:700;color:#6B7280;margin-bottom:8px">Matching tags</div><div style="display:flex;flex-wrap:wrap;gap:7px"><sc-for list="{{ tagMatches }}" as="tg" hint-placeholder-count="2"><span onClick="{{ tg.onClick }}" data-behavior="filter listing by tag" style="padding:4px 11px;border-radius:6px;font-size:12px;background:#E0EDF1;color:#035E7B;font-weight:500;cursor:pointer">#{{ tg.name }}</span></sc-for></div></div></sc-if>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ questions }}" as="q" hint-placeholder-count="3">
+        <div onClick="{{ q.onOpen }}" data-behavior="-&gt; question detail" style="display:flex;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;background:#fff;cursor:pointer" style-hover="box-shadow:0 2px 8px rgba(29,33,45,.09)"><sc-if value="{{ spineShow }}" hint-placeholder-val="{{ true }}"><div style="width:6px;flex:none;background: {{ q.spine }}"></div></sc-if><div style="flex:1;min-width:0;padding:13px 15px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span style="display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:9999px;font-size:10px;font-weight:600;background: {{ q.statusBg }};color: {{ q.statusFg }}">{{ q.statusLabel }}</span><span style="font-size:11px;color:#9CA3AF">{{ q.catName }} · {{ q.time }}</span></div><div style="font-size:15px;font-weight:600;line-height:1.35">{{ q.title }}</div><div style="display:flex;gap:13px;color:#6B7280;font-size:12px;margin-top:7px"><span>▲ {{ q.votes }}</span><span>{{ q.replies }} answers</span><span>{{ q.views }} views</span></div></div></div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== TAGS ===== -->
+  <sc-if value="{{ isTags }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width: {{ wrapMax }};margin:0 auto;padding:26px 24px 40px">
+    <h1 class="rhd" style="margin:0 0 6px;font-size:22px;font-weight:700">Tags</h1>
+    <p style="margin:0 0 20px;font-size:13px;color:#6B7280">Browse questions by topic. A tag groups questions on the same subject.</p>
+    <div style="display:grid;grid-template-columns: {{ tagGrid }};gap:12px">
+      <sc-for list="{{ allTagCards }}" as="tg" hint-placeholder-count="8">
+        <div onClick="{{ tg.onClick }}" data-behavior="-&gt; listing filtered by tag" style="border:1px solid #E5E7EB;border-radius:8px;padding:14px;background:#fff;cursor:pointer" style-hover="box-shadow:0 2px 8px rgba(29,33,45,.1)"><span style="display:inline-block;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;background:#E0EDF1;color:#035E7B;margin-bottom:8px">#{{ tg.name }}</span><div style="font-size:12px;color:#6B7280;line-height:1.5">{{ tg.desc }}</div><div style="font-size:11px;color:#9CA3AF;margin-top:8px">{{ tg.count }} questions</div></div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== CATEGORY ===== -->
+  <sc-if value="{{ isCategory }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="border-bottom:1px solid #E6E9EA;background:#fff"><div style="max-width: {{ wrapMax }};margin:0 auto;padding:26px 24px"><div onClick="{{ goHome }}" data-behavior="-&gt; all spaces" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#6B7280;cursor:pointer;margin-bottom:14px" style-hover="color:#047A9F"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5l-5 5 5 5"></path></svg>All spaces</div><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><div style="width:46px;height:46px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;background: {{ catHero.tint }}"><span style="width:16px;height:16px;border-radius:5px;background: {{ catHero.color }}"></span></div><div style="flex:1;min-width:0"><h1 class="rhd" style="margin:0;font-size:24px;font-weight:700;letter-spacing:-.3px">{{ catHero.name }}</h1><p style="margin:3px 0 0;font-size:13px;color:#6B7280">{{ catHero.desc }}</p></div><button onClick="{{ goAsk }}" data-behavior="-&gt; Ask Question (category preselected)" style="font-weight:600;font-size:13px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:6px;padding:9px 16px;cursor:pointer;white-space:nowrap">Ask in {{ catHero.short }}</button></div></div></div>
+    <div style="max-width: {{ wrapMax }};margin:0 auto;padding:22px 24px 40px"><div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap"><sc-for list="{{ sortTabs }}" as="t" hint-placeholder-count="4"><span onClick="{{ t.onClick }}" data-behavior="re-sort" style="padding:6px 13px;border-radius:9999px;font-size:12px;cursor:pointer;font-weight:600;background: {{ t.bg }};color: {{ t.fg }}">{{ t.label }}</span></sc-for></div><div style="display:flex;flex-direction:column;gap:12px;max-width:760px"><sc-for list="{{ questions }}" as="q" hint-placeholder-count="3"><div onClick="{{ q.onOpen }}" data-behavior="-&gt; question detail" style="display:flex;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 0 1px rgba(29,33,45,.2),0 1px 2px rgba(29,33,45,.06)" style-hover="box-shadow:0 0 1px rgba(29,33,45,.25),0 4px 10px rgba(29,33,45,.1)"><sc-if value="{{ spineShow }}" hint-placeholder-val="{{ true }}"><div style="width:7px;flex:none;background: {{ q.spine }}"></div></sc-if><div style="flex:1;min-width:0;padding:14px 16px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:9999px;font-size:11px;font-weight:600;background: {{ q.statusBg }};color: {{ q.statusFg }}">{{ q.statusLabel }}</span><span style="font-size:11px;color:#9CA3AF">{{ q.time }}</span></div><div style="font-size:15px;font-weight:600;line-height:1.35">{{ q.title }}</div><div style="display:flex;align-items:center;gap:13px;color:#6B7280;font-size:12px;margin-top:8px"><span>▲ {{ q.votes }}</span><span>{{ q.replies }} answers</span><span>{{ q.views }} views</span><span style="margin-left:auto">by {{ q.author.name }}</span></div></div></div></sc-for></div></div>
+  </div>
+  </sc-if>
+
+  <!-- ===== PROFILE ===== -->
+  <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div style="border-bottom:1px solid #E6E9EA;background: {{ heroBg }};position:relative;overflow:hidden"><sc-if value="{{ heroDark }}" hint-placeholder-val="{{ true }}"><img src="assets/inventive-mark.svg" width="300" height="300" alt="" style="position:absolute;right:-60px;top:-90px;opacity:.09"></sc-if><div style="max-width:900px;margin:0 auto;padding:30px 24px;position:relative;display:flex;align-items:center;gap:18px;flex-wrap:wrap"><div style="width:66px;height:66px;border-radius:50%;color:#fff;font-weight:700;font-size:24px;display:flex;align-items:center;justify-content:center;flex:none;border:3px solid rgba(255,255,255,.5);background: {{ prof.tone }}">{{ prof.initials }}</div><div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:9px"><h1 class="rhd" style="margin:0;font-size:24px;font-weight:700;color: {{ heroTitle }}">{{ prof.name }}</h1><sc-if value="{{ prof.isStaff }}" hint-placeholder-val="{{ true }}"><span style="padding:2px 9px;border-radius:9999px;font-size:11px;font-weight:600;background:linear-gradient(90deg,#F1EDFB,#FFEEE7);color:#61508C">Inventive Staff</span></sc-if></div><p style="margin:4px 0 0;font-size:13px;color: {{ heroSub }}">{{ prof.role }} · Joined {{ prof.joined }}</p></div><sc-if value="{{ prof.isMe }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:8px"><button onClick="{{ goEditProfile }}" data-behavior="-&gt; edit profile" style="font-weight:600;font-size:13px;color: {{ heroBtnFg }};background: {{ heroBtnBg }};border:none;border-radius:8px;padding:8px 15px;cursor:pointer">Edit Profile</button><button onClick="{{ goSettings }}" data-behavior="-&gt; settings" style="font-weight:600;font-size:13px;color: {{ heroTitle }};background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:8px 13px;cursor:pointer">Settings</button></div></sc-if></div></div>
+    <div style="max-width:900px;margin:0 auto;padding:22px 24px 40px">
+      <div style="display:flex;gap:12px;margin-bottom:22px;flex-wrap:wrap"><div style="flex:1;min-width:120px;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;background:#fff"><div class="rhd" style="font-size:22px;font-weight:700">{{ prof.qCount }}</div><div style="font-size:12px;color:#6B7280">Questions asked</div></div><div style="flex:1;min-width:120px;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;background:#fff"><div class="rhd" style="font-size:22px;font-weight:700">{{ prof.aCount }}</div><div style="font-size:12px;color:#6B7280">Answers given</div></div><div style="flex:1;min-width:120px;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;background:#fff"><div class="rhd" style="font-size:22px;font-weight:700;color:#047A9F">{{ prof.rep }}</div><div style="font-size:12px;color:#6B7280">Upvotes received</div></div></div>
+      <div style="display:flex;gap:22px;border-bottom:1px solid #E6E9EA;margin-bottom:14px"><span onClick="{{ setProfQ }}" data-behavior="show questions tab" style="padding:9px 0;font-size:13px;font-weight:600;cursor:pointer;color: {{ profTabQFg }};border-bottom:2px solid {{ profTabQBorder }}">Questions</span><span onClick="{{ setProfA }}" data-behavior="show answers tab" style="padding:9px 0;font-size:13px;font-weight:600;cursor:pointer;color: {{ profTabAFg }};border-bottom:2px solid {{ profTabABorder }}">Answers</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><sc-for list="{{ profList }}" as="q" hint-placeholder-count="3"><div onClick="{{ q.onOpen }}" data-behavior="-&gt; question detail" style="display:flex;align-items:center;gap:12px;border:1px solid #E5E7EB;border-radius:8px;padding:13px 16px;background:#fff;cursor:pointer" style-hover="box-shadow:0 2px 6px rgba(29,33,45,.08)"><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600">{{ q.title }}</div><div style="font-size:11px;color:#9CA3AF;margin-top:3px">{{ q.catName }} · {{ q.time }}</div></div><span style="display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:9999px;font-size:11px;font-weight:600;background: {{ q.statusBg }};color: {{ q.statusFg }};flex:none">{{ q.statusLabel }}</span><span style="display:inline-flex;align-items:center;gap:5px;color:#6B7280;font-size:12px;flex:none">▲ {{ q.votes }}</span></div></sc-for><sc-if value="{{ profEmpty }}" hint-placeholder-val="{{ false }}"><div style="text-align:center;padding:30px;color:#9CA3AF;font-size:13px">Nothing here yet.</div></sc-if></div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== NOTIFICATIONS ===== -->
+  <sc-if value="{{ isNotifs }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:720px;margin:0 auto;padding:22px 24px 48px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px"><h1 class="rhd" style="margin:0;font-size:22px;font-weight:700">Notifications</h1><span onClick="{{ markAllRead }}" data-behavior="marks all read" style="margin-left:auto;font-size:12px;color:#047A9F;cursor:pointer">Mark all as read</span></div>
+    <sc-if value="{{ notifsEmpty }}" hint-placeholder-val="{{ false }}"><div style="text-align:center;padding:44px 20px;border:1px dashed #D1D5DB;border-radius:10px;background:#fff"><img src="assets/not-found.svg" width="110" alt="" style="opacity:.9"><div style="font-size:15px;font-weight:600;margin:14px 0 4px">You're all caught up</div><p style="margin:0;font-size:13px;color:#6B7280">New answers, mentions, and verified fixes will show up here.</p></div></sc-if>
+    <div style="display:flex;flex-direction:column;gap:1px;border:1px solid #E5E7EB;border-radius:10px;overflow:hidden;background:#fff">
+      <sc-for list="{{ notifs }}" as="n" hint-placeholder-count="5">
+        <div onClick="{{ n.onClick }}" data-behavior="-&gt; related question detail; marks read" style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;border-bottom:1px solid #F0F2F3;background: {{ n.bg }}" style-hover="background:#F9FBFB">
+          <div style="width:34px;height:34px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background: {{ n.iconBg }}"><span style="font-size:15px">{{ n.icon }}</span></div>
+          <div style="flex:1;min-width:0"><div style="font-size:13px;line-height:1.45"><b>{{ n.actor }}</b> {{ n.text }} <span style="color:#047A9F">{{ n.target }}</span></div><div style="font-size:11px;color:#9CA3AF;margin-top:3px">{{ n.time }}</div></div>
+          <sc-if value="{{ n.unread }}" hint-placeholder-val="{{ true }}"><span style="width:8px;height:8px;border-radius:50%;background:#047A9F;flex:none;margin-top:6px"></span></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== AUTH ===== -->
+  <sc-if value="{{ isAuth }}" hint-placeholder-val="{{ false }}">
+  <div style="min-height:calc(100vh - 60px);display:flex;align-items:flex-start;justify-content:center;padding:48px 20px;background:linear-gradient(139deg,#E1DAF7 -20%,#EEF0F1 55%)">
+    <div style="width:100%;max-width:380px">
+      <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:20px"><img src="assets/inventive-mark.svg" width="34" height="34" alt=""><span class="rhd" style="font-weight:700;font-size:18px">Inventive AI Community</span></div>
+      <div style="border:1px solid #E5E7EB;border-radius:12px;padding:26px;background:#fff;box-shadow:0 10px 30px rgba(16,24,40,.1)">
+        <div style="display:flex;gap:4px;padding:3px;background:#F3F5F6;border-radius:8px;margin-bottom:22px"><span onClick="{{ setLogin }}" data-behavior="show login form" style="flex:1;text-align:center;padding:8px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;background: {{ loginBg }};color: {{ loginFg }}">Log In</span><span onClick="{{ setSignup }}" data-behavior="show signup form" style="flex:1;text-align:center;padding:8px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;background: {{ signupBg }};color: {{ signupFg }}">Sign Up</span></div>
+        <sc-if value="{{ isSignup }}" hint-placeholder-val="{{ false }}"><div><label style="display:block;font-size:12px;font-weight:600;margin-bottom:5px">Full name</label><input placeholder="Jordan Lee" style="width:100%;padding:10px 12px;font-size:14px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;margin-bottom:5px">Work email</label><input placeholder="you@company.com" data-behavior="validated; must be a work domain" style="width:100%;padding:10px 12px;font-size:14px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;margin-bottom:5px">Password</label><input type="password" placeholder="At least 8 characters" style="width:100%;padding:10px 12px;font-size:14px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;margin-bottom:18px"><button data-behavior="Supabase auth signUp -&gt; email verification" style="width:100%;font-weight:600;font-size:14px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:8px;padding:11px;cursor:pointer">Create Account</button></div></sc-if>
+        <sc-if value="{{ isLoginForm }}" hint-placeholder-val="{{ true }}"><div><label style="display:block;font-size:12px;font-weight:600;margin-bottom:5px">Work email</label><input placeholder="you@company.com" style="width:100%;padding:10px 12px;font-size:14px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;margin-bottom:5px">Password</label><input type="password" placeholder="Your password" style="width:100%;padding:10px 12px;font-size:14px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;margin-bottom:8px"><div style="text-align:right;margin-bottom:16px"><span onClick="{{ goReset }}" data-behavior="-&gt; password reset flow" style="font-size:12px;color:#047A9F;cursor:pointer">Forgot password?</span></div><button onClick="{{ goHome }}" data-behavior="Supabase signInWithPassword -&gt; home" style="width:100%;font-weight:600;font-size:14px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:8px;padding:11px;cursor:pointer">Log In</button></div></sc-if>
+        <div style="display:flex;align-items:center;gap:10px;margin:16px 0;color:#9CA3AF;font-size:11px"><div style="flex:1;height:1px;background:#E5E7EB"></div>OR<div style="flex:1;height:1px;background:#E5E7EB"></div></div>
+        <button data-behavior="Supabase SSO (Okta / SAML)" style="width:100%;font-weight:600;font-size:13px;color:#323739;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:10px;cursor:pointer" style-hover="background:#F9FBFB">Continue with Okta SSO</button>
+      </div>
+      <p style="text-align:center;font-size:11px;color:#9CA3AF;margin-top:16px">By continuing you agree to the Community Guidelines.</p>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== ADMIN / MODERATION ===== -->
+  <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width: {{ wrapMax }};margin:0 auto;padding:24px 24px 48px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px"><h1 class="rhd" style="margin:0;font-size:22px;font-weight:700">Moderation</h1><span style="padding:2px 9px;border-radius:9999px;font-size:11px;font-weight:600;background:linear-gradient(90deg,#F1EDFB,#FFEEE7);color:#61508C">Staff only</span><span style="margin-left:auto;font-size:12px;color:#6B7280">{{ queueCount }} items in queue</span></div>
+    <div style="display:flex;gap:12px;margin-bottom:22px;flex-wrap:wrap"><div style="flex:1;min-width:130px;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;background:#fff"><div class="rhd" style="font-size:22px;font-weight:700;color:#E91E63">{{ queueCount }}</div><div style="font-size:12px;color:#6B7280">Open reports</div></div><div style="flex:1;min-width:130px;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;background:#fff"><div class="rhd" style="font-size:22px;font-weight:700">12</div><div style="font-size:12px;color:#6B7280">Awaiting first answer</div></div><div style="flex:1;min-width:130px;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;background:#fff"><div class="rhd" style="font-size:22px;font-weight:700;color:#2E7D39">98%</div><div style="font-size:12px;color:#6B7280">Resolved &lt; 24h</div></div></div>
+    <div style="display:flex;gap:22px;border-bottom:1px solid #E6E9EA;margin-bottom:16px"><span style="padding:9px 0;font-size:13px;font-weight:600;color:#047A9F;border-bottom:2px solid #047A9F;cursor:pointer">Report Queue</span><span style="padding:9px 0;font-size:13px;font-weight:500;color:#6B7280;cursor:pointer" data-behavior="tab -&gt; flagged users list">Flagged Users</span><span style="padding:9px 0;font-size:13px;font-weight:500;color:#6B7280;cursor:pointer" data-behavior="tab -&gt; moderation activity log">Activity Log</span></div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ queue }}" as="r" hint-placeholder-count="3">
+        <div style="border:1px solid #E5E7EB;border-radius:10px;padding:16px 18px;background:#fff">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap"><span style="padding:2px 9px;border-radius:6px;font-size:11px;font-weight:600;background:#F3F5F6;color:#4A5154">{{ r.kind }}</span><span style="padding:2px 9px;border-radius:9999px;font-size:11px;font-weight:600;background:#FCE4EC;color:#C2185B">{{ r.reason }}</span><span style="font-size:11px;color:#9CA3AF;margin-left:auto">Reported by {{ r.reporter }} · {{ r.time }}</span></div>
+          <div style="font-size:13px;line-height:1.5;color:#374151;padding:10px 12px;background:#F9FBFB;border-radius:8px;border:1px solid #F0F2F3;margin-bottom:12px">“{{ r.content }}”<div style="font-size:11px;color:#9CA3AF;margin-top:6px">by {{ r.author }}</div></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><button onClick="{{ r.onResolve }}" data-behavior="approve/keep content -&gt; resolves report" style="font-size:12px;font-weight:600;color:#2E7D39;background:#E8F5E9;border:1px solid #C6E7CB;border-radius:6px;padding:7px 14px;cursor:pointer">Keep</button><button onClick="{{ r.onResolve }}" data-behavior="remove content -&gt; hides it, notifies author" style="font-size:12px;font-weight:600;color:#fff;background:#C2185B;border:1px solid #C2185B;border-radius:6px;padding:7px 14px;cursor:pointer">Remove</button><button onClick="{{ r.onResolve }}" data-behavior="dismiss report -&gt; no action" style="font-size:12px;font-weight:600;color:#4A5154;background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:7px 14px;cursor:pointer">Dismiss</button><button data-behavior="-&gt; view full item in context" style="font-size:12px;font-weight:600;color:#047A9F;background:none;border:none;cursor:pointer;margin-left:auto">View in context →</button></div>
+        </div>
+      </sc-for>
+      <sc-if value="{{ queueEmpty }}" hint-placeholder-val="{{ false }}"><div style="text-align:center;padding:40px 20px;border:1px dashed #C6E7CB;border-radius:10px;background:#F4FBF5;color:#2E7D39;font-size:13px;font-weight:600">Queue clear — nothing to moderate.</div></sc-if>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== RESET PASSWORD ===== -->
+  <sc-if value="{{ isReset }}" hint-placeholder-val="{{ false }}">
+  <div style="min-height:calc(100vh - 60px);display:flex;align-items:flex-start;justify-content:center;padding:48px 20px;background:linear-gradient(139deg,#E1DAF7 -20%,#EEF0F1 55%)">
+    <div style="width:100%;max-width:380px">
+      <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:20px"><img src="assets/inventive-mark.svg" width="34" height="34" alt=""><span class="rhd" style="font-weight:700;font-size:18px">Inventive AI Community</span></div>
+      <div style="border:1px solid #E5E7EB;border-radius:12px;padding:26px;background:#fff;box-shadow:0 10px 30px rgba(16,24,40,.1)">
+        <h1 class="rhd" style="margin:0 0 6px;font-size:20px;font-weight:700">Reset your password</h1>
+        <p style="margin:0 0 18px;font-size:13px;line-height:1.5;color:#6B7280">Enter the email you use for the community and we'll send a reset link.</p>
+        <label style="display:block;font-size:12px;font-weight:600;margin-bottom:5px">Work email</label>
+        <input placeholder="you@company.com" style="width:100%;padding:10px 12px;font-size:14px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;margin-bottom:18px">
+        <button data-behavior="Supabase resetPasswordForEmail -&gt; confirmation" style="width:100%;font-weight:600;font-size:14px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:8px;padding:11px;cursor:pointer;margin-bottom:14px">Send reset link</button>
+        <div style="text-align:center"><span onClick="{{ goAuth }}" data-behavior="-&gt; back to login" style="font-size:12px;color:#047A9F;cursor:pointer">← Back to log in</span></div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== EDIT PROFILE ===== -->
+  <sc-if value="{{ isEditProfile }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:640px;margin:0 auto;padding:22px 24px 48px">
+    <div onClick="{{ onProfileClick }}" data-behavior="discard -&gt; profile" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#6B7280;cursor:pointer;margin-bottom:14px" style-hover="color:#047A9F"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5l-5 5 5 5"></path></svg>Cancel</div>
+    <h1 class="rhd" style="margin:0 0 20px;font-size:24px;font-weight:700;letter-spacing:-.3px">Edit Profile</h1>
+    <div style="border:1px solid #E5E7EB;border-radius:10px;padding:22px;background:#fff;box-shadow:0 0 1px rgba(29,33,45,.2),0 2px 4px rgba(29,33,45,.08)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px"><div style="width:60px;height:60px;border-radius:50%;background:#FF8800;color:#fff;font-weight:700;font-size:22px;display:flex;align-items:center;justify-content:center;flex:none">PN</div><button data-behavior="opens avatar upload (Supabase Storage)" style="font-weight:600;font-size:13px;color:#323739;background:linear-gradient(180deg,#fff -75%,#f3f4f6 100%);border:1px solid #E5E7EB;border-radius:6px;padding:8px 14px;cursor:pointer">Change photo</button></div>
+      <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Display name</label>
+      <input value="Priya Nair" style="width:100%;padding:10px 12px;font-size:14px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;margin-bottom:16px">
+      <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Username</label>
+      <div style="display:flex;align-items:center;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;margin-bottom:16px;overflow:hidden"><span style="padding:10px 0 10px 12px;font-size:14px;color:#9CA3AF">community.inventive.ai/u/</span><input value="priya" data-behavior="validated unique on blur" style="flex:1;padding:10px 8px;font-size:14px;border:none;background:transparent;outline:none"></div>
+      <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Company</label>
+      <input value="Northwind Security" style="width:100%;padding:10px 12px;font-size:14px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;margin-bottom:16px">
+      <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Bio</label>
+      <textarea placeholder="A line or two about what you work on" style="width:100%;min-height:90px;padding:12px;font-size:13px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;resize:vertical;line-height:1.6;margin-bottom:20px">RFP lead. Mostly living in security questionnaires.</textarea>
+      <div style="display:flex;justify-content:flex-end;gap:10px"><button onClick="{{ onProfileClick }}" data-behavior="discard" style="font-weight:600;font-size:13px;color:#323739;background:linear-gradient(180deg,#fff -75%,#f3f4f6 100%);border:1px solid #E5E7EB;border-radius:6px;padding:9px 16px;cursor:pointer">Cancel</button><button onClick="{{ onProfileClick }}" data-behavior="update profiles row -&gt; back to profile" style="font-weight:600;font-size:13px;color:#fff;background:linear-gradient(180deg,#047A9F,#035E7B);border:1px solid #035E7B;border-radius:6px;padding:9px 18px;cursor:pointer">Save Changes</button></div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== SETTINGS ===== -->
+  <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:640px;margin:0 auto;padding:22px 24px 48px">
+    <div onClick="{{ onProfileClick }}" data-behavior="-&gt; profile" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#6B7280;cursor:pointer;margin-bottom:14px" style-hover="color:#047A9F"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5l-5 5 5 5"></path></svg>Back to profile</div>
+    <h1 class="rhd" style="margin:0 0 20px;font-size:24px;font-weight:700;letter-spacing:-.3px">Settings</h1>
+
+    <div style="border:1px solid #E5E7EB;border-radius:10px;background:#fff;margin-bottom:16px;overflow:hidden">
+      <div style="padding:16px 20px;border-bottom:1px solid #F0F2F3;font-size:14px;font-weight:700">Account</div>
+      <div style="padding:8px 20px">
+        <div style="display:flex;align-items:center;padding:12px 0;border-bottom:1px solid #F0F2F3"><div><div style="font-size:13px;font-weight:600">Email</div><div style="font-size:12px;color:#9CA3AF">priya@northwind.com</div></div><span data-behavior="-&gt; change email flow" style="margin-left:auto;font-size:12px;font-weight:600;color:#047A9F;cursor:pointer">Change</span></div>
+        <div style="display:flex;align-items:center;padding:12px 0"><div><div style="font-size:13px;font-weight:600">Password</div><div style="font-size:12px;color:#9CA3AF">Last changed 3 months ago</div></div><span onClick="{{ goReset }}" data-behavior="-&gt; reset password" style="margin-left:auto;font-size:12px;font-weight:600;color:#047A9F;cursor:pointer">Change</span></div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #E5E7EB;border-radius:10px;background:#fff;margin-bottom:16px;overflow:hidden">
+      <div style="padding:16px 20px;border-bottom:1px solid #F0F2F3;display:flex;align-items:baseline;gap:8px"><span style="font-size:14px;font-weight:700">Notifications</span><span style="font-size:12px;color:#9CA3AF">Email me when…</span></div>
+      <div style="padding:6px 20px">
+        <sc-for list="{{ prefRows }}" as="p" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #F0F2F3"><span style="flex:1;font-size:13px">{{ p.label }}</span><div onClick="{{ p.onClick }}" data-behavior="toggles this email preference" style="width:38px;height:22px;border-radius:9999px;position:relative;cursor:pointer;flex:none;transition:background .15s;background: {{ p.track }}"><span style="position:absolute;top:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.2);transition:left .15s;left: {{ p.knob }}"></span></div></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="border:1px solid #F5D6E1;border-radius:10px;background:#FDF2F6;padding:16px 20px;display:flex;align-items:center;gap:12px">
+      <div style="flex:1"><div style="font-size:13px;font-weight:600;color:#C2185B">Log out of the community</div><div style="font-size:12px;color:#9C6B80">You can sign back in any time with SSO or email.</div></div>
+      <button onClick="{{ goAuth }}" data-behavior="Supabase signOut -&gt; login" style="font-weight:600;font-size:13px;color:#C2185B;background:#fff;border:1px solid #F1B9CD;border-radius:6px;padding:8px 16px;cursor:pointer">Log Out</button>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== MOBILE BOTTOM NAV ===== -->
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;bottom:0;left:0;right:0;height:56px;background:#fff;border-top:1px solid #E6E9EA;display:flex;align-items:center;z-index:30;max-width: {{ frameMax }};margin:0 auto">
+    <div onClick="{{ goHome }}" data-behavior="-&gt; home" style="flex:1;text-align:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="{{ mnHome }}" stroke-width="1.7"><path d="M3 9l7-6 7 6v8a1 1 0 01-1 1h-4v-6H8v6H4a1 1 0 01-1-1V9z"></path></svg><div style="font-size:9px;color:{{ mnHome }};margin-top:2px">Home</div></div>
+    <div onClick="{{ goSearchTop }}" data-behavior="-&gt; search" style="flex:1;text-align:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="{{ mnSearch }}" stroke-width="1.7"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.5 13.5L17 17"></path></svg><div style="font-size:9px;color:{{ mnSearch }};margin-top:2px">Search</div></div>
+    <div onClick="{{ goAsk }}" data-behavior="-&gt; ask" style="flex:1;text-align:center;cursor:pointer"><div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(180deg,#047A9F,#035E7B);display:flex;align-items:center;justify-content:center;margin:0 auto"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="2"><path d="M10 4v12M4 10h12"></path></svg></div></div>
+    <div onClick="{{ goNotifs }}" data-behavior="-&gt; notifications" style="flex:1;text-align:center;cursor:pointer;position:relative"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="{{ mnNotif }}" stroke-width="1.7"><path d="M5 15V9a5 5 0 0110 0v6h1l-1 2H5l-1-2h1z"></path><path d="M8 17a2 2 0 004 0"></path></svg><sc-if value="{{ hasUnread }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;top:-2px;right:24px;width:8px;height:8px;border-radius:50%;background:#E91E63"></span></sc-if><div style="font-size:9px;color:{{ mnNotif }};margin-top:2px">Alerts</div></div>
+    <div onClick="{{ onProfileClick }}" data-behavior="-&gt; profile" style="flex:1;text-align:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="{{ mnProfile }}" stroke-width="1.7"><circle cx="10" cy="7" r="3"></circle><path d="M4 17a6 6 0 0112 0"></path></svg><div style="font-size:9px;color:{{ mnProfile }};margin-top:2px">You</div></div>
+  </div>
+  </sc-if>
+
+  <!-- ===== REPORT MODAL ===== -->
+  <sc-if value="{{ reportOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeReport }}" style="position:fixed;inset:0;background:rgba(16,24,40,.5);z-index:50;display:flex;align-items:center;justify-content:center;padding:20px">
+    <div onClick="{{ stop }}" style="width:100%;max-width:420px;background:#fff;border-radius:12px;box-shadow:0 25px 50px rgba(16,24,40,.25);overflow:hidden">
+      <div style="padding:18px 20px;border-bottom:1px solid #F0F2F3;display:flex;align-items:center"><div class="rhd" style="font-size:16px;font-weight:700">Report this {{ reportKind }}</div><svg onClick="{{ closeReport }}" data-behavior="close modal" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9CA3AF" stroke-width="1.8" style="margin-left:auto;cursor:pointer"><path d="M5 5l10 10M15 5L5 15"></path></svg></div>
+      <div style="padding:18px 20px">
+        <sc-if value="{{ reportDone }}" hint-placeholder-val="{{ false }}"><div style="text-align:center;padding:20px 0"><div style="width:44px;height:44px;border-radius:50%;background:#E8F5E9;display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="24" height="24" viewBox="0 0 20 20" fill="none" stroke="#2E7D39" stroke-width="2"><path d="M4 10l4 4 8-8"></path></svg></div><div style="font-size:15px;font-weight:600;margin-bottom:4px">Report submitted</div><p style="margin:0;font-size:13px;color:#6B7280">Our moderators will review it shortly. Thanks for helping keep the community useful.</p></div></sc-if>
+        <sc-if value="{{ reportForm }}" hint-placeholder-val="{{ true }}"><div>
+          <div style="font-size:12px;color:#6B7280;margin-bottom:12px">Why are you reporting this? Reports are anonymous to other members.</div>
+          <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:14px"><sc-for list="{{ reportReasons }}" as="r" hint-placeholder-count="5"><label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #E5E7EB;border-radius:8px;cursor:pointer;font-size:13px" style-hover="background:#F9FBFB"><span style="width:14px;height:14px;border-radius:50%;border:1.5px solid #C4C9CC;flex:none"></span>{{ r }}</label></sc-for></div>
+          <textarea placeholder="Add any detail (optional)" style="width:100%;min-height:70px;padding:10px;font-size:13px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FBFB;outline:none;resize:vertical;margin-bottom:14px"></textarea>
+          <div style="display:flex;justify-content:flex-end;gap:10px"><button onClick="{{ closeReport }}" data-behavior="cancel" style="font-weight:600;font-size:13px;color:#323739;background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:9px 16px;cursor:pointer">Cancel</button><button onClick="{{ submitReport }}" data-behavior="POST report -&gt; moderation queue" style="font-weight:600;font-size:13px;color:#fff;background:#C2185B;border:1px solid #C2185B;border-radius:6px;padding:9px 18px;cursor:pointer">Submit Report</button></div>
+        </div></sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== PROTOTYPE NAV (remove in production) ===== -->
+  <div style="position:fixed;bottom:0;left:0;right:0;z-index:60;background:#191D1F;color:#fff;display:flex;align-items:center;gap:6px;padding:7px 12px;font-size:11px;overflow-x:auto;flex-wrap:wrap">
+    <span style="font-weight:700;letter-spacing:.04em;color:#7C8588;text-transform:uppercase;flex:none">Prototype nav</span>
+    <sc-for list="{{ devScreens }}" as="d" hint-placeholder-count="10"><span onClick="{{ d.onClick }}" style="flex:none;padding:4px 9px;border-radius:5px;cursor:pointer;font-weight:600;background: {{ d.bg }};color: {{ d.fg }}">{{ d.label }}</span></sc-for>
+    <span style="flex:none;width:1px;height:16px;background:#3A4145;margin:0 4px"></span>
+    <sc-for list="{{ devStates }}" as="d" hint-placeholder-count="4"><span onClick="{{ d.onClick }}" style="flex:none;padding:4px 9px;border-radius:5px;cursor:pointer;font-weight:600;background: {{ d.bg }};color: {{ d.fg }}">{{ d.label }}</span></sc-for>
+    <span style="flex:none;width:1px;height:16px;background:#3A4145;margin:0 4px"></span>
+    <sc-for list="{{ devDevice }}" as="d" hint-placeholder-count="2"><span onClick="{{ d.onClick }}" style="flex:none;padding:4px 9px;border-radius:5px;cursor:pointer;font-weight:600;background: {{ d.bg }};color: {{ d.fg }}">{{ d.label }}</span></sc-for>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900},&quot;heroStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Teal gradient&quot;,&quot;Light&quot;],&quot;default&quot;:&quot;Teal gradient&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Appearance&quot;},&quot;cardStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Status spine&quot;,&quot;Flat&quot;],&quot;default&quot;:&quot;Status spine&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Appearance&quot;},&quot;showRightRail&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { view:'home', sort:'trending', cat:'all', search:'', tag:null, cur:'q1', profName:'Priya Nair', profTab:'questions',
+    voted:{}, aVoted:{}, follows:{}, dataState:'ready', device:'desktop', authTab:'login',
+    reportOpen:false, reportKind:'question', reportDone:false, notifsRead:{},
+    prefs:{answers:true,mentions:true,verified:true,upvotes:true,digest:false} };
+
+  ME='Priya Nair';
+
+  AUTHORS={
+    'Priya Nair':{initials:'PN',tone:'#FF8800',role:'Member',staff:false},
+    'Marcus Web':{initials:'MW',tone:'#31A2DA',role:'Member',staff:false},
+    'Jon Lin':{initials:'JL',tone:'#419C4D',role:'Member',staff:false},
+    'Elena Ruiz':{initials:'ER',tone:'#FF6969',role:'Member',staff:false},
+    'Tom Fields':{initials:'TF',tone:'#035E7B',role:'Member',staff:false},
+    'Sara Okafor':{initials:'SO',tone:'#A084E8',role:'Member',staff:false},
+    'Nate Park':{initials:'NP',tone:'#C08A57',role:'Member',staff:false},
+    'Amara Sy':{initials:'AS',tone:'#2E7D39',role:'Member',staff:false},
+    'Dana Ruiz':{initials:'DR',tone:'#047A9F',role:'Inventive Staff',staff:true},
+  };
+
+  CATS=[
+    {id:'getting-started',name:'Getting Started',short:'Getting Started',color:'#31A2DA',tint:'#EAF4FB',fg:'#1E6A93',desc:'Setup, first projects, and finding your way around Inventive AI.'},
+    {id:'rfp',name:'RFP & Proposals',short:'RFP',color:'#FF8800',tint:'#FFF1E7',fg:'#B45309',desc:'Drafting, generating, and delivering long-form proposals and RFP responses.'},
+    {id:'security',name:'Security Questionnaires',short:'Security',color:'#035E7B',tint:'#E0EDF1',fg:'#035E7B',desc:'CAIQ, SIG, and spreadsheet-style questionnaire workflows.'},
+    {id:'knowledge',name:'Knowledge Hub',short:'Knowledge Hub',color:'#419C4D',tint:'#EAF3EB',fg:'#2E7D39',desc:'Managing reference documents, websites, and Q&A pairs.'},
+    {id:'copilot',name:'AI Agents & Copilot',short:'Copilot',color:'#A084E8',tint:'#F1EDFB',fg:'#61508C',desc:'Agentic chat, prompts, citations, and everything AI-assisted.'},
+    {id:'integrations',name:'Integrations',short:'Integrations',color:'#F4BF96',tint:'#FBEEE3',fg:'#A15B27',desc:'Salesforce, Slack, the Chrome extension, and the API.'},
+    {id:'account',name:'Account & Billing',short:'Account',color:'#FF6969',tint:'#FFE9E9',fg:'#B4232C',desc:'SSO, roles, seats, and subscription questions.'},
+  ];
+
+  STATUS={
+    verified:{spine:'#047A9F',label:'Staff Verified',bg:'#E0EDF1',fg:'#035E7B',check:true},
+    community:{spine:'#4CAF59',label:'Community Solved',bg:'#E8F5E9',fg:'#2E7D39',check:true},
+    open:{spine:'#9CA3AF',label:'In Discussion',bg:'#F3F5F6',fg:'#636B6E',check:false},
+    unanswered:{spine:'#FFC107',label:'Awaiting Answer',bg:'#FFF8E1',fg:'#B37800',check:false},
+  };
+
+  TAGDESC={draft:'Draft generation and AI writing',performance:'Speed and timeouts',export:'Exporting completed work',excel:'Spreadsheet questionnaires',indexing:'Re-processing documents','knowledge-hub':'Managing your reference library',copilot:'The AI assistant',citations:'Sources and references',sso:'Single sign-on',okta:'Okta identity provider',onboarding:'Getting a new team started','best-practices':'Recommended workflows',salesforce:'Salesforce integration',sync:'Data syncing'};
+
+  QS=[
+    {id:'q1',cat:'rfp',status:'verified',title:'Draft generation stuck at "Analyzing knowledge base" for large RFPs',body:'When I kick off a draft for a 120-question RFP the progress bar sits at the analyzing step for 10+ minutes and then times out. Smaller projects generate fine within a minute. Is there a project-size limit, or something I can do to keep it moving?',author:'Priya Nair',time:'2h ago',up:24,views:412,tags:['draft','performance'],ageH:2,
+      comments:[{author:'Marcus Web',body:'Seeing the same thing on a 90-question one.',time:'1h ago'}],
+      answers:[{id:'a1',author:'Dana Ruiz',time:'1h ago',up:31,accepted:true,body:'This happens when a large batch is re-indexing mid-draft. Pause the sync under Knowledge Hub \u2192 Indexing, then restart the draft \u2014 it resumes in under a minute. We are also rolling out incremental indexing this month so the pause won\u2019t be needed.'},{id:'a2',author:'Jon Lin',time:'40m ago',up:4,accepted:false,body:'Worth checking your reference set too \u2014 I had one 900-page PDF that alone stalled the analyze step. Splitting it into sections fixed it for me.'}]},
+    {id:'q2',cat:'security',status:'open',title:'Excel export drops cell formatting on multi-sheet questionnaires',body:'After exporting a completed CAIQ the merged header cells lose their fill color and borders. Single-sheet exports look fine. Is there a setting I\u2019m missing, or a recommended export format?',author:'Marcus Web',time:'5h ago',up:12,views:198,tags:['export','excel'],ageH:5,comments:[],
+      answers:[{id:'a3',author:'Sara Okafor',time:'3h ago',up:6,accepted:false,body:'I hit this too. Exporting as .xlsx instead of the legacy .xls format kept my merged headers and fills intact \u2014 give that a try.'}]},
+    {id:'q3',cat:'knowledge',status:'community',title:'How do I re-index a single document after updating it in Knowledge Hub?',body:'I replaced a datasheet with a newer version but Copilot keeps citing the old numbers. Do I have to re-upload everything, or can I refresh just that one file?',author:'Jon Lin',time:'6h ago',up:9,views:140,tags:['indexing','knowledge-hub'],ageH:6,comments:[],
+      answers:[{id:'a4',author:'Amara Sy',time:'5h ago',up:12,accepted:true,body:'Open the document in Knowledge Hub, click the \u22ef menu on its row and choose Re-index. It reprocesses just that file \u2014 no need to touch the rest. Takes about a minute for a datasheet.'}]},
+    {id:'q4',cat:'copilot',status:'unanswered',title:'Copilot not citing sources from a specific Knowledge Hub folder',body:'Answers pull from most of our library but never from the "Compliance" folder, even when I ask directly about its contents. The folder is indexed and visible. Anyone seen this?',author:'Elena Ruiz',time:'1d ago',up:6,views:73,tags:['copilot','citations'],ageH:26,comments:[],answers:[]},
+    {id:'q5',cat:'account',status:'verified',title:'SSO login redirect loop after changing our Okta configuration',body:'After our IT team rotated the Okta app, everyone gets bounced between Okta and Inventive in a loop and can\u2019t sign in. What needs to be updated on the Inventive side?',author:'Tom Fields',time:'2d ago',up:18,views:521,tags:['sso','okta'],ageH:50,comments:[],
+      answers:[{id:'a5',author:'Dana Ruiz',time:'2d ago',up:22,accepted:true,body:'Okta rotation changes your ACS URL and signing cert. Update the SSO metadata under Settings \u2192 Security and re-upload the new IdP certificate \u2014 the loop clears immediately once the cert matches.'}]},
+    {id:'q6',cat:'getting-started',status:'community',title:'Best way to structure Knowledge Hub folders for a brand-new team',body:'We\u2019re onboarding and about to load ~300 reference docs. Is it better to organize by product line, by document type, or by customer? Curious what\u2019s worked for larger teams.',author:'Sara Okafor',time:'3d ago',up:15,views:302,tags:['onboarding','best-practices'],ageH:74,comments:[],
+      answers:[{id:'a6',author:'Priya Nair',time:'2d ago',up:19,accepted:true,body:'By document type first (datasheets, policies, past responses), then tag by product line. Copilot retrieves on content, not folders, so the tags matter more than deep nesting. Keep it two levels max.'}]},
+    {id:'q7',cat:'integrations',status:'open',title:'Salesforce widget not syncing opportunity fields into the project',body:'The Inventive widget shows on the opportunity but the account name and deal stage don\u2019t carry into the new project. Field mapping looks correct. Where should I look?',author:'Nate Park',time:'4d ago',up:7,views:88,tags:['salesforce','sync'],ageH:98,comments:[],
+      answers:[{id:'a7',author:'Priya Nair',time:'3d ago',up:3,accepted:false,body:'Check that the connected Salesforce user has read access to those fields \u2014 the sync silently skips fields the integration user can\u2019t see. That was my issue.'}]},
+  ];
+
+  NOTIFS=[
+    {id:'n1',actor:'Dana Ruiz',text:'answered your question',target:'Draft generation stuck at "Analyzing knowledge base"',qid:'q1',time:'1h ago',icon:'\uD83D\uDCAC',iconBg:'#E0EDF1',unread:true},
+    {id:'n2',actor:'Inventive Team',text:'marked an answer Staff Verified on',target:'SSO login redirect loop after Okta change',qid:'q5',time:'3h ago',icon:'\u2713',iconBg:'#F1EDFB',unread:true},
+    {id:'n3',actor:'Sara Okafor',text:'upvoted your answer on',target:'Best way to structure Knowledge Hub folders',qid:'q6',time:'1d ago',icon:'\u25B2',iconBg:'#E8F5E9',unread:false},
+    {id:'n4',actor:'Jon Lin',text:'mentioned you in',target:'Re-index a single document',qid:'q3',time:'2d ago',icon:'@',iconBg:'#FFF1E7',unread:false},
+    {id:'n5',actor:'Marcus Web',text:'commented on',target:'Salesforce widget not syncing',qid:'q7',time:'3d ago',icon:'\uD83D\uDCAC',iconBg:'#EAF4FB',unread:false},
+  ];
+
+  QUEUE=[
+    {id:'r1',kind:'Question',reason:'Spam / advertising',reporter:'Nate Park',author:'promo_deals',content:'Get 50% off premium RFP templates \u2014 visit my site to download hundreds of ready-made answers!',time:'20m ago'},
+    {id:'r2',kind:'Answer',reason:'Incorrect / harmful',reporter:'Elena Ruiz',author:'anon_user',content:'Just turn off SSO entirely and share one login across the team, way less hassle.',time:'2h ago'},
+    {id:'r3',kind:'Comment',reason:'Harassment',reporter:'Sara Okafor',author:'ghost42',content:'This is a pointless question, did you even read the docs?',time:'5h ago'},
+  ];
+
+  au(name){const a=this.AUTHORS[name]||{initials:'?',tone:'#9CA3AF',role:'Member',staff:false};return{name,initials:a.initials,tone:a.tone,role:a.role,isStaff:a.staff};}
+  cat(id){return this.CATS.find(c=>c.id===id)||this.CATS[0];}
+  votesOf(q){return q.up+(this.state.voted[q.id]?1:0);}
+  aVotesOf(a){return a.up+(this.state.aVoted[a.id]?1:0);}
+  go(view,extra){this.setState(Object.assign({view},extra||{}));try{window.scrollTo(0,0);}catch(e){}}
+  openQ(id){this.go('detail',{cur:id});}
+  openCat(id){this.go('category',{cat:id,sort:'trending'});}
+  openProfile(n){this.go('profile',{profName:n,profTab:'questions'});}
+
+  filtered(){
+    const s=this.state;let list=this.QS.slice();
+    if(s.view==='category'&&s.cat!=='all')list=list.filter(q=>q.cat===s.cat);
+    if(s.tag)list=list.filter(q=>q.tags.includes(s.tag));
+    if(s.search)  {const t=s.search.toLowerCase();list=list.filter(q=>(q.title+' '+q.body+' '+q.tags.join(' ')).toLowerCase().includes(t));}
+    if(s.sort==='unanswered')list=list.filter(q=>q.status==='unanswered'||q.answers.length===0);
+    if(s.sort==='new')list.sort((a,b)=>a.ageH-b.ageH);
+    else if(s.sort==='top')list.sort((a,b)=>this.votesOf(b)-this.votesOf(a));
+    else list.sort((a,b)=>(this.votesOf(b)+b.answers.length*3)-(this.votesOf(a)+a.answers.length*3));
+    return list;
+  }
+
+  card(q){
+    const st=this.STATUS[q.status],c=this.cat(q.cat),acc=q.answers.find(a=>a.accepted),accAu=acc?this.au(acc.author):null;
+    return{id:q.id,title:q.title,snippet:q.body.length>150?q.body.slice(0,150)+'\u2026':q.body,author:this.au(q.author),time:q.time,
+      catName:c.name,catFg:c.fg,spine:st.spine,statusLabel:st.label,statusBg:st.bg,statusFg:st.fg,statusCheck:st.check,
+      votes:this.votesOf(q),replies:q.answers.length,views:q.views,voteColor:this.state.voted[q.id]?'#047A9F':'#6B7280',
+      hasAccepted:!!acc,accepted:acc?{name:accAu.name,initials:accAu.initials,tone:accAu.tone,isStaff:accAu.isStaff,body:acc.body.length>170?acc.body.slice(0,170)+'\u2026':acc.body}:{},
+      tags:q.tags.map(t=>({name:t,onClick:()=>this.go('feed',{tag:t,view:'feed'})})),
+      onOpen:()=>this.openQ(q.id),onVote:()=>this.setState(s=>({voted:Object.assign({},s.voted,{[q.id]:!s.voted[q.id]})})),
+      onAuthor:()=>this.openProfile(q.author),onReport:()=>this.openReport('question')};
+  }
+
+  openReport(kind){this.setState({reportOpen:true,reportKind:kind,reportDone:false});}
+
+  renderVals(){
+    const s=this.state;
+    const heroTeal=(this.props.heroStyle ?? 'Teal gradient')==='Teal gradient';
+    const spineShow=(this.props.cardStyle ?? 'Status spine')==='Status spine';
+    const mob=s.device==='mobile';
+    const showRailPref=this.props.showRightRail ?? true;
+
+    const hero=heroTeal
+      ?{heroBg:'linear-gradient(135deg,#04252F 0%,#035E7B 55%,#047A9F 100%)',heroTitle:'#fff',heroSub:'#CFE3E9',heroDark:true,heroBtnBg:'#fff',heroBtnFg:'#035E7B'}
+      :{heroBg:'linear-gradient(139deg,#E1DAF7 -30%,#FFF 62%)',heroTitle:'#191D1F',heroSub:'#4B5563',heroDark:false,heroBtnBg:'linear-gradient(180deg,#047A9F,#035E7B)',heroBtnFg:'#fff'};
+
+    const counts={};this.QS.forEach(q=>counts[q.cat]=(counts[q.cat]||0)+1);
+    const spaces=this.CATS.map(c=>({name:c.name,dot:c.color,tint:c.tint,count:counts[c.id]||0,onClick:()=>this.openCat(c.id)}));
+    const sidebar=[{id:'all',name:'All Questions',dot:'#047A9F',count:this.QS.length}].concat(this.CATS.map(c=>({id:c.id,name:c.name,dot:c.color,count:counts[c.id]||0})))
+      .map(c=>{const active=(s.view==='feed'&&c.id==='all')||(s.view==='category'&&s.cat===c.id);
+        return{name:c.name,dot:c.dot,count:c.count,onClick:c.id==='all'?()=>this.go('feed',{cat:'all',tag:null}):()=>this.openCat(c.id),bg:active?'#E0EDF1':'transparent',fg:active?'#035E7B':'#4A5154',weight:active?'600':'500',countFg:active?'#5D9AAD':'#9CA3AF'};});
+
+    const tabDefs=[['trending','Trending'],['new','New'],['unanswered','Unanswered'],['top','Top']];
+    const sortTabs=tabDefs.map(([k,l])=>({label:l,onClick:()=>this.setState({sort:k}),bg:s.sort===k?'#047A9F':'#F3F5F6',fg:s.sort===k?'#fff':'#4A5154'}));
+
+    const list=this.filtered();
+    const questions=list.map(q=>this.card(q));
+    const ds=s.dataState;
+    const isLoading=ds==='loading',isError=ds==='error';
+    const isEmpty=ds==='empty'||(ds==='ready'&&questions.length===0);
+    const isReady=ds==='ready'&&!isEmpty;
+
+    const trending=this.QS.slice().sort((a,b)=>(this.votesOf(b)+b.answers.length*3)-(this.votesOf(a)+a.answers.length*3)).slice(0,4).map(q=>this.card(q));
+
+    // detail
+    const cq=this.QS.find(q=>q.id===s.cur)||this.QS[0];
+    const cst=this.STATUS[cq.status],cc=this.cat(cq.cat);
+    const answers=cq.answers.slice().sort((a,b)=>(b.accepted?1:0)-(a.accepted?1:0)).map(a=>{const au=this.au(a.author),isStaff=au.isStaff;
+      return{name:au.name,initials:au.initials,tone:au.tone,isStaff,time:a.time,body:a.body,accepted:a.accepted,acceptLabel:isStaff?'Verified Answer':'Accepted Answer',acceptBg:isStaff?'#E0EDF1':'#E8F5E9',acceptFg:isStaff?'#035E7B':'#2E7D39',bg:a.accepted?(isStaff?'#F5FAFB':'#F4FBF5'):'#fff',borderColor:a.accepted?(isStaff?'#DCEBEF':'#D4EBD6'):'#E5E7EB',votes:this.aVotesOf(a),voteColor:s.aVoted[a.id]?'#047A9F':'#6B7280',onVote:()=>this.setState(st=>({aVoted:Object.assign({},st.aVoted,{[a.id]:!st.aVoted[a.id]})})),onAuthor:()=>this.openProfile(a.author),onReport:()=>this.openReport('answer')};});
+    const cur={title:cq.title,body:cq.body,author:this.au(cq.author),time:cq.time,catName:cc.name,catFg:cc.fg,spine:cst.spine,statusLabel:cst.label,statusBg:cst.bg,statusFg:cst.fg,statusCheck:cst.check,votes:this.votesOf(cq),voteColor:s.voted[cq.id]?'#047A9F':'#6B7280',views:cq.views,replies:cq.answers.length,answers,noAnswers:cq.answers.length===0,comments:cq.comments||[],tags:cq.tags.map(t=>({name:t,onClick:()=>this.go('feed',{tag:t,view:'feed'})})),onVote:()=>this.setState(st=>({voted:Object.assign({},st.voted,{[cq.id]:!st.voted[cq.id]})})),onAuthor:()=>this.openProfile(cq.author),onReport:()=>this.openReport('question')};
+    const following=!!s.follows[cq.id];
+
+    const askCats=this.CATS.map(c=>({name:c.name,dot:c.color,bg:'#fff',fg:'#4A5154',border:'#E5E7EB',onClick:()=>{}}));
+    const ch=this.cat(s.cat);const catHero={name:ch.name,short:ch.short,desc:ch.desc,color:ch.color,tint:ch.tint};
+
+    const rep={};this.QS.forEach(q=>q.answers.forEach(a=>{rep[a.author]=(rep[a.author]||0)+a.up;}));
+    const contributors=Object.keys(rep).sort((a,b)=>rep[b]-rep[a]).slice(0,4).map(n=>{const a=this.au(n);return{name:n,initials:a.initials,tone:a.tone,role:a.role,rep:rep[n],onClick:()=>this.openProfile(n)};});
+
+    const allTags=[];this.QS.forEach(q=>q.tags.forEach(t=>{if(!allTags.includes(t))allTags.push(t);}));
+    const tagCount={};this.QS.forEach(q=>q.tags.forEach(t=>tagCount[t]=(tagCount[t]||0)+1));
+    const popularTags=allTags.slice(0,8).map(t=>({name:t,onClick:()=>this.go('feed',{tag:t,view:'feed'})}));
+    const allTagCards=allTags.map(t=>({name:t,desc:this.TAGDESC[t]||'',count:tagCount[t],onClick:()=>this.go('feed',{tag:t,view:'feed'})}));
+    const tagMatches=s.search?allTags.filter(t=>t.includes(s.search.toLowerCase())).map(t=>({name:t,onClick:()=>this.go('feed',{tag:t,view:'feed'})})):[];
+
+    // profile
+    const pAu=this.au(s.profName);const pQs=this.QS.filter(q=>q.author===s.profName);
+    let aGiven=0,aRep=0;this.QS.forEach(q=>q.answers.forEach(a=>{if(a.author===s.profName){aGiven++;aRep+=a.up;}}));
+    const qRep=pQs.reduce((n,q)=>n+q.up,0);
+    const profSrc=s.profTab==='questions'?pQs:this.QS.filter(q=>q.answers.some(a=>a.author===s.profName));
+    const profList=profSrc.map(q=>{const st=this.STATUS[q.status],c=this.cat(q.cat);return{title:q.title,catName:c.name,time:q.time,statusLabel:st.label,statusBg:st.bg,statusFg:st.fg,votes:this.votesOf(q),onOpen:()=>this.openQ(q.id)};});
+    const prof={name:pAu.name,initials:pAu.initials,tone:pAu.tone,role:pAu.role,isStaff:pAu.isStaff,isMe:s.profName===this.ME,joined:'Mar 2025',qCount:pQs.length,aCount:aGiven,rep:qRep+aRep};
+
+    // notifications
+    const notifs=this.NOTIFS.map(n=>{const unread=n.unread&&!s.notifsRead[n.id];return{actor:n.actor,text:n.text,target:n.target,time:n.time,icon:n.icon,iconBg:n.iconBg,unread,bg:unread?'#F5FAFB':'#fff',onClick:()=>this.setState(st=>({view:'detail',cur:n.qid,notifsRead:Object.assign({},st.notifsRead,{[n.id]:true})}))};});
+    const unreadCount=this.NOTIFS.filter(n=>n.unread&&!s.notifsRead[n.id]).length;
+
+    // admin
+    const queue=this.QUEUE.map(r=>({kind:r.kind,reason:r.reason,reporter:r.reporter,author:r.author,content:r.content,time:r.time,onResolve:()=>{}}));
+
+    const prefDefs=[['answers','New answers to your questions'],['mentions','Mentions of you'],['verified','An answer gets Staff Verified'],['upvotes','Upvotes on your posts'],['digest','Weekly community digest']];
+    const prefRows=prefDefs.map(([k,l])=>({label:l,onClick:()=>this.setState(st=>({prefs:Object.assign({},st.prefs,{[k]:!st.prefs[k]})})),track:s.prefs[k]?'#047A9F':'#D1D5DB',knob:s.prefs[k]?'18px':'2px'}));
+
+    // dev nav
+    const screens=[['home','Home'],['feed','Listing'],['detail','Detail'],['ask','Ask'],['search','Search'],['tags','Tags'],['category','Category'],['profile','Profile'],['notifications','Notifications'],['auth','Login'],['reset','Reset PW'],['editProfile','Edit Profile'],['settings','Settings'],['admin','Moderation']];
+    const devScreens=screens.map(([v,l])=>({label:l,onClick:()=>this.go(v,v==='search'?{search:s.search||'export'}:{}),bg:s.view===v?'#047A9F':'#2A3134',fg:s.view===v?'#fff':'#C9D0D3'}));
+    const stateDefs=[['ready','Normal'],['loading','Loading'],['empty','Empty'],['error','Error']];
+    const devStates=stateDefs.map(([v,l])=>({label:l,onClick:()=>this.setState({dataState:v,view:'feed'}),bg:s.dataState===v?'#FF8800':'#2A3134',fg:s.dataState===v?'#191D1F':'#C9D0D3'}));
+    const devDevice=[['desktop','Desktop'],['mobile','Mobile']].map(([v,l])=>({label:l,onClick:()=>this.setState({device:v}),bg:s.device===v?'#A084E8':'#2A3134',fg:s.device===v?'#191D1F':'#C9D0D3'}));
+
+    const mc=(v)=>s.view===v?'#047A9F':'#9CA3AF';
+
+    return{
+      goHome:()=>this.go('home',{cat:'all',tag:null}),goFeed:()=>this.go('feed',{cat:'all',tag:null}),goAsk:()=>this.go('ask'),goTags:()=>this.go('tags'),
+      goNotifs:()=>this.go('notifications'),goSearchTop:()=>this.go('search',{search:s.search||'export'}),
+      goReset:()=>this.go('reset'),goEditProfile:()=>this.go('editProfile'),goSettings:()=>this.go('settings'),goAuth:()=>this.go('auth'),prefRows,
+      onProfileClick:()=>this.openProfile(this.ME),meName:this.ME,meInitials:this.AUTHORS[this.ME].initials,
+      search:s.search,onSearch:(e)=>this.setState({search:e.target.value}),onSearchKey:(e)=>{if(e.key==='Enter')this.go('search');},
+      isHome:false,isFeed:s.view==='feed'||s.view==='home',isDetail:s.view==='detail',isAsk:s.view==='ask',isSearch:s.view==='search',isTags:s.view==='tags',isCategory:s.view==='category',isProfile:s.view==='profile',isNotifs:s.view==='notifications',isAuth:s.view==='auth',isAdmin:s.view==='admin',isReset:s.view==='reset',isEditProfile:s.view==='editProfile',isSettings:s.view==='settings',
+      isDesktop:!mob,isMobile:mob,spineShow,showSidebar:!mob,showRail:showRailPref&&!mob,
+      frameMax:mob?'440px':'none',frameBorder:mob?'1px solid #D1D5DB':'none',frameRadius:mob?'0':'0',frameShadow:mob?'0 10px 40px rgba(16,24,40,.14)':'none',
+      wrapMax:mob?'100%':'1180px',heroPad:mob?'26px 18px 24px':'40px 24px 36px',h1Size:mob?'22px':'30px',spaceGrid:mob?'1fr':'repeat(auto-fill,minmax(220px,1fr))',tagGrid:mob?'1fr 1fr':'repeat(auto-fill,minmax(200px,1fr))',
+      ...hero,
+      navFeedW:s.view==='feed'?'600':'500',navFeedC:s.view==='feed'?'#035E7B':'#4A5154',navFeedBg:s.view==='feed'?'#E0EDF1':'transparent',
+      navTagW:s.view==='tags'?'600':'500',navTagC:s.view==='tags'?'#035E7B':'#4A5154',navTagBg:s.view==='tags'?'#E0EDF1':'transparent',
+      hasUnread:unreadCount>0,unreadCount,
+      spaces,sidebar,sortTabs,questions,resultCount:questions.length,
+      isLoading,isError,isEmpty,isReady,skeletons:[1,2,3,4,5],retry:()=>this.setState({dataState:'ready'}),
+      trending,contributors,popularTags,allTagCards,
+      tagActive:!!s.tag,tag:s.tag||'',clearTag:()=>this.setState({tag:null}),
+      hasTagMatches:tagMatches.length>0,tagMatches,
+      cur,askCats,submitAsk:()=>this.go('detail',{cur:'q1'}),catHero,
+      toggleFollow:()=>this.setState(st=>({follows:Object.assign({},st.follows,{[cq.id]:!st.follows[cq.id]})})),
+      followLabel:following?'Following':'Follow',followBg:following?'#E0EDF1':'#fff',followFg:following?'#035E7B':'#4A5154',followBorder:following?'#B7D5DF':'#E5E7EB',
+      prof,profList,profEmpty:profList.length===0,setProfQ:()=>this.setState({profTab:'questions'}),setProfA:()=>this.setState({profTab:'answers'}),
+      profTabQFg:s.profTab==='questions'?'#047A9F':'#6B7280',profTabQBorder:s.profTab==='questions'?'#047A9F':'transparent',profTabAFg:s.profTab==='answers'?'#047A9F':'#6B7280',profTabABorder:s.profTab==='answers'?'#047A9F':'transparent',
+      notifs,notifsEmpty:notifs.length===0,markAllRead:()=>{const m={};this.NOTIFS.forEach(n=>m[n.id]=true);this.setState({notifsRead:m});},
+      authTab:s.authTab,isLoginForm:s.authTab==='login',isSignup:s.authTab==='signup',setLogin:()=>this.setState({authTab:'login'}),setSignup:()=>this.setState({authTab:'signup'}),
+      loginBg:s.authTab==='login'?'#fff':'transparent',loginFg:s.authTab==='login'?'#191D1F':'#6B7280',signupBg:s.authTab==='signup'?'#fff':'transparent',signupFg:s.authTab==='signup'?'#191D1F':'#6B7280',
+      queue,queueCount:this.QUEUE.length,queueEmpty:this.QUEUE.length===0,
+      reportOpen:s.reportOpen,reportKind:s.reportKind,reportDone:s.reportDone,reportForm:!s.reportDone,reportReasons:['Spam or advertising','Off-topic or low quality','Incorrect or harmful information','Harassment or abuse','Something else'],
+      closeReport:()=>this.setState({reportOpen:false}),stop:(e)=>e.stopPropagation(),submitReport:()=>this.setState({reportDone:true}),
+      devScreens,devStates,devDevice,
+      mnHome:mc('home'),mnSearch:mc('search'),mnNotif:mc('notifications'),mnProfile:mc('profile'),
+    };
+  }
+}
+</script>
+</body>
+</html>

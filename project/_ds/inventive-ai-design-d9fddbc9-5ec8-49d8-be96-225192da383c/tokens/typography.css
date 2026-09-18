@@ -1,0 +1,48 @@
+/* Inventive AI — Typography tokens
+   Display: Red Hat Display · Body/UI: Figtree
+   Scale mirrors the Webflow base stylesheet (rem-based, 16px root). */
+
+:root {
+  /* ---- Families ---- */
+  --font-display: "Red Hat Display", "Arial", sans-serif;
+  --font-body:    "Figtree", "Arial", sans-serif;
+  --font-mono:    "SFMono-Regular", "Menlo", "Consolas", monospace;
+
+  /* ---- Weights ---- */
+  --fw-light:    300; /* @kind font */
+  --fw-regular:  400; /* @kind font */
+  --fw-medium:   500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold:     700; /* @kind font */
+
+  /* ---- Display / heading scale ---- */
+  --fs-h1: 3rem;     /* 48px — hero */
+  --fs-h2: 2.75rem;  /* 44px — section title */
+  --fs-h3: 2rem;     /* 32px — feature head */
+  --fs-h4: 1.375rem; /* 22px */
+  --fs-h5: 1.125rem; /* 18px */
+  --fs-h6: 1rem;     /* 16px */
+
+  /* ---- Body / UI scale ---- */
+  --fs-body-lg: 1.125rem; /* 18px — default paragraph */
+  --fs-body:    1rem;     /* 16px */
+  --fs-sm:      0.875rem;  /* 14px */
+  --fs-xs:      0.75rem;   /* 12px */
+
+  /* ---- Line heights ---- */
+  --lh-tight:   1.1; /* @kind font */
+  --lh-heading: 1.4; /* @kind font */
+  --lh-snug:    1.5; /* @kind font */
+  --lh-body:    1.7; /* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --ls-tight:  -0.03em; /* @kind font */
+  --ls-snug:   -0.02em; /* @kind font */
+  --ls-normal: 0; /* @kind font */
+  --ls-wide:   0.04em;  /* @kind font */
+
+  /* ---- Semantic aliases ---- */
+  --heading-font:   var(--font-display);
+  --heading-weight: var(--fw-semibold);
+  --body-font:      var(--font-body);
+}

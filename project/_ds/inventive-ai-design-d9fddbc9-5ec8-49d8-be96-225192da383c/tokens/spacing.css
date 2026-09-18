@@ -1,0 +1,49 @@
+/* Inventive AI — Spacing, layout, radius & elevation tokens */
+
+:root {
+  /* ---- Spacing scale (4px base) ---- */
+  --space-1:  0.25rem;  /* 4 */
+  --space-2:  0.5rem;   /* 8 */
+  --space-3:  0.75rem;  /* 12 */
+  --space-4:  1rem;     /* 16 */
+  --space-5:  1.25rem;  /* 20 */
+  --space-6:  1.5rem;   /* 24 */
+  --space-8:  2rem;     /* 32 */
+  --space-10: 2.5rem;   /* 40 */
+  --space-12: 3rem;     /* 48 */
+  --space-16: 4rem;     /* 64 */
+  --space-20: 5rem;     /* 80 */
+
+  /* ---- Section rhythm (vertical) ---- */
+  --section-pad:          80px;  /* standard section padding-block */
+  --section-pad-desktop:  150px; /* large / hero sections */
+  --section-pad-mobile:   60px;
+  --section-title-space:  40px;  /* gap below a section eyebrow+title */
+
+  /* ---- Container ---- */
+  --container-max:  80rem;   /* 1280px — standard site width */
+  --container-pad:  1.25rem; /* 20px gutter */
+
+  /* ---- Radius ---- */
+  --radius-xs:     0.375rem; /* 6px  — buttons, inputs */
+  --radius-sm:     0.5rem;   /* 8px */
+  --radius-md:     0.75rem;  /* 12px — small cards / chips */
+  --radius-lg:     1.25rem;  /* 20px — surface cards */
+  --radius-xl:     1.5rem;   /* 24px */
+  --radius-pill:   3.125rem; /* pills / eyebrow chips */
+  --radius-round:  50%;
+
+  /* ---- Elevation (soft, low-spread brand shadows) ---- */
+  --shadow-xs:   0 2px 5px rgba(0, 0, 0, 0.10);
+  --shadow-sm:   0 5px 14px rgba(8, 15, 52, 0.04);
+  --shadow-card: 0 4px 25px rgba(13, 10, 44, 0.06);
+  --shadow-md:   0 8px 28px rgba(23, 15, 73, 0.08);
+  --shadow-lg:   0 12px 30px rgba(20, 20, 43, 0.17);
+  --shadow-pop:  0 10px 20px rgba(0, 0, 0, 0.10);
+
+  /* ---- Motion ---- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --dur-fast:   0.2s; /* @kind other */
+  --dur-base:   0.3s; /* @kind other */
+  --transition-button: color 0.3s, background-color 0.3s; /* @kind other */
+}

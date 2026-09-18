@@ -1,0 +1,228 @@
+/* Inventive AI Design System — Colors & Type */
+
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: 'Vela Sans';
+  src: url('./fonts/VelaSans-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vela Sans';
+  src: url('./fonts/VelaSans-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vela Sans';
+  src: url('./fonts/VelaSans-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vela Sans';
+  src: url('./fonts/VelaSans-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body sans (Figtree) and Display (Red Hat Display) loaded from Google Fonts —
+   include this link tag in your HTML:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Red+Hat+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+*/
+
+:root {
+  /* ───────── Type families ───────── */
+  --font-sans: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Red Hat Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Vela Sans', ui-monospace, 'SF Mono', Menlo, monospace; /* Vela Sans used as branded spec/display mono */
+
+  /* ───────── Type scale (from tailwind.config.js + globals.css) ───────── */
+  --text-caption: 0.625rem;   /* 10px */
+  --text-subbody: 0.75rem;    /* 12px */
+  --text-body:    0.875rem;   /* 14px — default app body */
+  --text-lg:      1rem;       /* 16px */
+  --text-mdlg:    1.125rem;   /* 18px */
+  --text-xl:      1.25rem;    /* 20px */
+  --text-2xl:     1.5rem;     /* 24px */
+  --text-3xl:     1.875rem;   /* 30px — page header */
+  --text-4xl:     2.25rem;    /* 36px */
+
+  /* Semantic headings (product) */
+  --h1-size: 1.875rem;  --h1-lh: 36px; --h1-weight: 700;
+  --h2-size: 1.375rem;  --h2-lh: 30px; --h2-weight: 600;
+  --h3-size: 1.125rem;  --h3-lh: 28px; --h3-weight: 600;
+  --h4-size: 1rem;      --h4-lh: 24px; --h4-weight: 600;
+  --h5-size: 0.875rem;  --h5-lh: 20px; --h5-weight: 600;
+  --h6-size: 0.75rem;   --h6-lh: 20px; --h6-weight: 600;
+
+  /* ───────── Primary (Inventive Teal) ───────── */
+  --primary-50:  #E5F2F5;
+  --primary-100: #E0EDF1;
+  --primary-200: #CCE1E8;
+  --primary-300: #B7D5DF;
+  --primary-400: #5D9AAD;
+  --primary-500: #047A9F;  /* default — "Inventive Teal" */
+  --primary-600: #035E7B;
+  --primary-700: #034B62;
+  --primary-800: #043848;
+  --primary-900: #04252F;
+  --primary: var(--primary-500);
+
+  /* ───────── Neutrals — Tailwind gray (canonical) ───────── */
+  --gray-50:  #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --gray-950: #030712;
+
+  /* Slate aliases kept for any component still referencing them */
+  --slate-50:  var(--gray-50);
+  --slate-100: var(--gray-100);
+  --slate-200: var(--gray-200);
+  --slate-300: var(--gray-300);
+  --slate-400: var(--gray-400);
+  --slate-500: var(--gray-500);
+  --slate-600: var(--gray-600);
+  --slate-700: var(--gray-700);
+  --slate-800: var(--gray-800);
+  --slate-900: var(--gray-900);
+
+  /* ───────── Semantic ───────── */
+  --success-50:  #E8F5E9;
+  --success-500: #4CAF59;
+  --success-600: #43A04F;
+  --success-700: #388E43;
+
+  --warning-50:  #FFF8E1;
+  --warning-500: #FFC107;
+  --warning-700: #FFA000;
+
+  --error-50:  #FCE4EC;
+  --error-500: #E91E63;
+  --error-700: #C2185B;
+
+  --info-50:  #EDF5FF;
+  --info-500: #4699FF;
+  --info-700: #326DB5;
+
+  /* ───────── Brand accent palette ("I" variants) ───────── */
+  --i-pompelmo: #FF6969;   /* red   */
+  --i-pompelmo-100: #FFE9E9;
+  --i-perrywinkle: #A084E8; /* purple (Copilot accent) */
+  --i-perrywinkle-100: #F1EDFB;
+  --i-perrywinkle-200: #E1DAF7;
+  --i-peach: #F4BF96;      /* peach */
+  --i-peach-200: #FBEADF;
+  --i-sky: #31A2DA;        /* blue (documents) */
+  --i-sky-200: #CDE2F2;
+  --i-mandarin: #FF8800;   /* orange (RFP, copilot gradient end) */
+  --i-mandarin-100: #FFEEE7;
+  --i-mandarin-200: #FFDBCB;
+  --i-forest: #419C4D;     /* green */
+  --i-forest-200: #CFE0D1;
+  --i-ink: #035E7B;        /* ink (same as primary-600) */
+
+  /* ───────── Surfaces & foreground ───────── */
+  --bg:          #FFFFFF;
+  --bg-subtle:   #F9FAFB;
+  --bg-muted:    #F3F5F6;
+  --surface:     #FFFFFF;
+  --surface-alt: #F9FBFB;
+
+  --fg:      #111827;       /* gray-900 tailwind */
+  --fg-1:    #1F2937;       /* gray-800 */
+  --fg-2:    #4B5563;       /* gray-600 (body) */
+  --fg-3:    #6B7280;       /* gray-500 muted */
+  --fg-on-primary: #FFFFFF;
+
+  --border:        #E5E7EB;
+  --border-subtle: #F3F4F6;
+  --border-strong: #D1D5DB;
+
+  /* ───────── Signature gradients ───────── */
+  --grad-btn-primary: linear-gradient(180deg, #047A9F 0%, #035E7B 100%);
+  --grad-btn-gray:    linear-gradient(180deg, #FFF -75%, #F3F4F6 100%);
+  --grad-rfp:         linear-gradient(139deg, #FBEADF -42.17%, #FFF 76.85%);
+  --grad-document:    linear-gradient(139deg, #CDE2F2 -42.17%, #FFF 76.85%);
+  --grad-website:     linear-gradient(139deg, #E1DAF7 -42.17%, #FFF 76.85%);
+  --grad-lime:        linear-gradient(139deg, #E8F0E9 -42.17%, #FFF 76.85%);
+  --grad-right-sidebar: linear-gradient(138deg, #F8F8FA 2.25%, #F0EDF8 76.46%);
+  --grad-copilot:     linear-gradient(180deg, #A084E8 41%, #FFB764 100%);
+  --grad-left-blue:   linear-gradient(90deg, rgba(229, 242, 245, 0.00) 0%, #E5F2F5 69.01%);
+  --grad-tab-rsb:     linear-gradient(90deg, #FFF6F2 0%, #FFF 22.57%);
+
+  /* ───────── Elevation / shadow system ───────── */
+  --shadow-xs:   0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  --shadow-sm:   0px 1px 2px -1px rgba(16, 24, 40, 0.10), 0px 1px 3px 0px rgba(16, 24, 40, 0.10);
+  --shadow-md:   0px 4px 6px -1px rgba(16, 24, 40, 0.10), 0px 2px 4px -2px rgba(16, 24, 40, 0.10);
+  --shadow-lg:   0px 10px 15px -3px rgba(16, 24, 40, 0.10), 0px 4px 6px -4px rgba(16, 24, 40, 0.10);
+  --shadow-xl:   0px 20px 25px -5px rgba(16, 24, 40, 0.10), 0px 8px 10px -6px rgba(16, 24, 40, 0.10);
+  --shadow-2xl:  0px 25px 50px -12px rgba(16, 24, 40, 0.25);
+  --shadow-card: 0px 0px 1px 0px rgba(29, 33, 45, 0.20), 0px 0px 2px 0px rgba(29, 33, 45, 0.08), 0px 2px 4px 0px rgba(29, 33, 45, 0.08);
+  --shadow-menu: 0px 0px 1px 0px rgba(29, 33, 45, 0.20), 0px 1px 4px 0px rgba(29, 33, 45, 0.15), 0px 16px 32px 0px rgba(29, 33, 45, 0.10);
+  --shadow-icon-glow: 0px 0px 8px 0px rgba(28, 186, 235, 0.50);
+  --shadow-dropdown:  0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.20);
+
+  /* ───────── Radii ───────── */
+  --radius-xs: 2px;
+  --radius-sm: 4px;   /* default card/input/button radius in app */
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ───────── Spacing (tailwind-like) ───────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ───────── Motion ───────── */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 400ms;
+}
+
+/* ───────── Semantic type mappings ───────── */
+html, body { font-family: var(--font-sans); color: var(--fg-1); font-size: var(--text-body); }
+h1, .h1 { font-family: var(--font-display); font-size: var(--h1-size); line-height: var(--h1-lh); font-weight: var(--h1-weight); letter-spacing: -0.01em; }
+h2, .h2 { font-family: var(--font-display); font-size: var(--h2-size); line-height: var(--h2-lh); font-weight: var(--h2-weight); letter-spacing: -0.01em; }
+h3, .h3 { font-family: var(--font-display); font-size: var(--h3-size); line-height: var(--h3-lh); font-weight: var(--h3-weight); }
+h4, .h4 { font-family: var(--font-display); font-size: var(--h4-size); line-height: var(--h4-lh); font-weight: var(--h4-weight); }
+h5, .h5 { font-family: var(--font-sans);    font-size: var(--h5-size); line-height: var(--h5-lh); font-weight: var(--h5-weight); }
+h6, .h6 { font-family: var(--font-sans);    font-size: var(--h6-size); line-height: var(--h6-lh); font-weight: var(--h6-weight); }
+
+.page-header {
+  font-family: var(--font-display);
+  color: var(--gray-800);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+}
+
+.body       { font-size: var(--text-body);    line-height: 20px; color: var(--fg-2); }
+.subbody    { font-size: var(--text-subbody); line-height: 20px; color: var(--fg-3); }
+.caption    { font-size: var(--text-caption); line-height: 14px; color: var(--fg-3); letter-spacing: 0.02em; }
+code, .mono { font-family: var(--font-mono);  font-size: var(--text-subbody); }

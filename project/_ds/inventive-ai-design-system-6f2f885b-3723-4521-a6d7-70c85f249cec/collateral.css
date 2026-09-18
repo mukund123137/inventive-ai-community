@@ -1,0 +1,130 @@
+/* Blog collateral helpers — built on the Inventive AI tokens (colors_and_type.css) */
+
+.col {
+  box-sizing: border-box;
+  font-family: var(--font-sans);
+  color: var(--gray-900);
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+.col *, .col *::before, .col *::after { box-sizing: border-box; }
+
+/* ---- Kicker / eyebrow (mono, branded) ---- */
+.k {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  color: var(--primary-500);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.k::before {
+  content: "";
+  width: 22px; height: 2px;
+  background: var(--primary-500);
+  display: inline-block;
+}
+.k.plain::before { display: none; }
+
+/* ---- Display headline ---- */
+.disp {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  color: var(--gray-900);
+  text-wrap: balance;
+  margin: 0;
+}
+.lede {
+  font-family: var(--font-sans);
+  color: var(--gray-600);
+  line-height: 1.45;
+  text-wrap: pretty;
+  margin: 0;
+}
+
+/* ---- Brand wordmark (text only, no logo) ---- */
+.wm {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--gray-900);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.wm .dot {
+  width: 11px; height: 11px; border-radius: 3px;
+  background: var(--primary-500);
+  display: inline-block;
+}
+.wm .ai { color: var(--primary-500); }
+
+/* ---- Atmosphere orb (perrywinkle blur, matches product background-blur) ---- */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ---- Content-type chip (3-letter square, brand convention) ---- */
+.chip {
+  border-radius: 8px;
+  display: grid; place-items: center;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  flex: none;
+}
+.chip.rfp { background: var(--i-mandarin); }
+.chip.doc { background: var(--i-sky); }
+.chip.web { background: var(--i-perrywinkle); }
+.chip.qna { background: var(--i-forest); }
+
+/* ---- Paper card ---- */
+.paper {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+/* ---- Stat numerals ---- */
+.stat {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--primary-500);
+}
+.stat .unit { color: var(--gray-900); }
+
+/* ---- Pills ---- */
+.pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 14px;
+  border-radius: 9999px;
+  font-size: 14px; font-weight: 600;
+  font-family: var(--font-sans);
+}
+.pill.ai { background: linear-gradient(90deg,#F1EDFB,#FFEEE7); color: #61508C; }
+.pill .pdot { width: 7px; height: 7px; border-radius: 50%; background: var(--i-perrywinkle); }
+
+/* ---- Copilot gradient swatch ---- */
+.grad-copilot { background: var(--grad-copilot); }
+
+/* checkmark glyph circle */
+.tick {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--primary-50);
+  color: var(--primary-500);
+  display: grid; place-items: center; flex: none;
+  font-weight: 700; font-size: 14px;
+}

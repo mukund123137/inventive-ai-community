@@ -1,0 +1,4 @@
+project_id = "inventive-ai-community"
+
+[db]
+major_version = 15

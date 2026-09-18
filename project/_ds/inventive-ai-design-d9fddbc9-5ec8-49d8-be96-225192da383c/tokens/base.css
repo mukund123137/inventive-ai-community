@@ -1,0 +1,105 @@
+/* Inventive AI — Base element styling & utilities
+   Mirrors the Webflow base layer so raw HTML inherits the brand. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background-color: var(--white);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  text-wrap: pretty;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--title);
+  font-family: var(--font-display);
+  margin: 0 0 0.625rem;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-heading);
+  margin-bottom: 1.5rem;
+}
+h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: 1.5;
+  letter-spacing: var(--ls-tight);
+}
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-heading);
+}
+h4 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-regular);
+  line-height: 1.5;
+  letter-spacing: var(--ls-snug);
+}
+h5 {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-semibold);
+  line-height: 1.5;
+}
+h6 {
+  font-size: var(--fs-h6);
+  font-weight: var(--fw-regular);
+  line-height: 1.5;
+}
+
+p {
+  margin: 0 0 0.625rem;
+  font-size: var(--fs-body-lg);
+}
+
+a {
+  color: var(--body);
+  text-decoration: none;
+}
+
+strong { font-weight: var(--fw-bold); }
+
+/* ---- Brand gradient text (stat numbers, emphasis) ---- */
+.ds-gradient-text {
+  background-image: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ---- Standard section + container helpers ---- */
+.ds-section {
+  padding-block: var(--section-pad);
+}
+.ds-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* ---- Eyebrow / kicker label ---- */
+.ds-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--brand-purple);
+}

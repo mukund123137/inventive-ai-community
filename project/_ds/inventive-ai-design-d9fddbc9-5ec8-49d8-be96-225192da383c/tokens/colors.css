@@ -1,0 +1,83 @@
+/* Inventive AI — Color tokens
+   Source of truth: inventiveai-staging.webflow.css :root + brand logo swatches.
+   Never invent new hex codes — extend by adding here. */
+
+:root {
+  /* ---- Brand pinwheel (the logo mark's six blades + core) ---- */
+  --brand-red:     #ff6969;
+  --brand-blue:    #31a2da;
+  --brand-peach:   #f4bf96; /* primary brand color */
+  --brand-orange:  #ff8800;
+  --brand-green:   #419c4d;
+  --brand-purple:  #a084e8;
+  --brand-teal:    #035e7b;
+
+  /* ---- Primary / CTA ---- */
+  --primary:        #f4bf96; /* peach — the brand CTA fill */
+  --primary-ink:    #000000; /* legible text on peach */
+  --primary-hover:  #000000; /* CTA hover flips to near-black (site behavior) */
+
+  /* ---- Ink / text ---- */
+  --title:   #04252f; /* deep teal-navy — all headings */
+  --ink:     #111111; /* near-black body default */
+  --body:    #333333; /* paragraph copy */
+  --gray:    #4a5154; /* secondary / muted copy */
+
+  /* ---- Neutral scale (Untitled UI grays, retained from build) ---- */
+  --gray-100: #f2f4f7;
+  --gray-300: #d0d5dd;
+  --gray-400: #98a2b3;
+  --gray-500: #667085;
+  --gray-700: #344054;
+  --gray-800: #1d2939;
+
+  /* ---- Surfaces ---- */
+  --white:        #ffffff;
+  --black:        #000000;
+  --bg:           #f6f6f6; /* page background */
+  --surface-card: #ffffff;
+
+  /* ---- Soft brand tints (section washes, chips, accents) ---- */
+  --peach-tint:   #fcecdf; /* warm wash */
+  --lilac-tint:   #ebdfed; /* cool wash */
+  --bg-2:         #e6dbf1; /* lilac — used in icon two-tone + page-title */
+  --bg-1:         #8971c6; /* violet */
+  --bg-3:         #e1efe3; /* mint */
+  --purple-light: #f3e8ff;
+  --purple-outline: #a287e6;
+
+  /* ---- Brand gradient (stat numbers, accents) ---- */
+  --grad-coral:  #ffa49c;
+  --grad-purple: #906fe0;
+  --gradient-brand: linear-gradient(#ffa49c, #906fe0); /* @kind other */
+  --gradient-stat-bg: linear-gradient(118deg, #fcecdf, #ebdfed); /* @kind other */
+  --gradient-icon: linear-gradient(135deg, #f8caa5, #c29dc8); /* @kind other */
+
+  /* ---- Semantic ---- */
+  --success:       #419c4d;
+  --success-tint:  #419c4d33;
+  --warning:       #ff8800;
+  --warning-tint:  #ff890333;
+  --info:          #31a2da;
+  --accent-tint:   #a287e633;
+
+  /* ---- Borders ---- */
+  --border-subtle: rgba(0, 0, 0, 0.1);
+  --border-card:   rgba(0, 0, 0, 0.08);
+  --border-strong: #000000;
+
+  /* ====== Semantic aliases (prefer these in components) ====== */
+  --text-title:   var(--title);
+  --text-body:    var(--body);
+  --text-muted:   var(--gray);
+  --text-on-dark: var(--white);
+
+  --surface-page: var(--bg);
+  --surface-1:    var(--white);
+  --surface-2:    var(--gray-100);
+
+  --cta-bg:       var(--primary);
+  --cta-fg:       var(--primary-ink);
+  --cta-bg-hover: var(--primary-hover);
+  --cta-fg-hover: var(--white);
+}
