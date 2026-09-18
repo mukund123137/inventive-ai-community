@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SearchIcon } from "@/components/icons";
 import { getTrending } from "@/lib/filters";
+import { useAuthModal } from "@/lib/auth-modal";
 import { useQuestionsList, useSearchQuestions } from "@/lib/queries";
 
 function splitMatch(title: string, query: string) {
@@ -27,6 +28,7 @@ function useDebounced(value: string, delay: number) {
 
 export function HomeSearch() {
   const router = useRouter();
+  const { requireAuth } = useAuthModal();
   const { data: all } = useQuestionsList();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
@@ -158,9 +160,9 @@ export function HomeSearch() {
                   type="button"
                   onClick={() => {
                     setFocused(false);
-                    router.push("/ask");
+                    requireAuth(() => router.push("/ask"));
                   }}
-                  data-behavior="-> Ask Question flow"
+                  data-behavior="-> Ask Question flow (login required)"
                   className="cursor-pointer rounded-md border border-peach bg-peach px-4 py-2.5 text-[13px] font-semibold text-ink transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-white"
                 >
                   Ask a Question
@@ -172,8 +174,8 @@ export function HomeSearch() {
       </div>
       <button
         type="button"
-        onClick={() => router.push("/ask")}
-        data-behavior="-> Ask Question flow"
+        onClick={() => requireAuth(() => router.push("/ask"))}
+        data-behavior="-> Ask Question flow (login required)"
         className="cursor-pointer rounded-lg border-none bg-peach px-5 text-[14px] font-semibold whitespace-nowrap text-ink shadow-hero-btn"
       >
         Ask a Question

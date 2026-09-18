@@ -141,7 +141,7 @@ export default function SettingsPage() {
           type="button"
           onClick={async () => {
             await createClient().auth.signOut();
-            router.push("/login");
+            router.push("/");
           }}
           data-behavior="Supabase signOut -> login"
           className="cursor-pointer rounded-md border border-magenta-border bg-white px-4 py-2 text-[13px] font-semibold text-magenta-dark"

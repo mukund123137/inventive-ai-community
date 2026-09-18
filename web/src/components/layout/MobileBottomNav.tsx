@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { AddIcon, BellIcon, HomeIcon, PersonIcon, SearchIcon } from "@/components/icons";
+import { useAuthModal } from "@/lib/auth-modal";
 import { useUnreadCount } from "@/lib/queries";
 
 function tint(active: boolean) {
@@ -11,6 +12,7 @@ function tint(active: boolean) {
 export function MobileBottomNav() {
   const pathname = usePathname();
   const router = useRouter();
+  const { requireAuth } = useAuthModal();
   const unread = useUnreadCount();
 
   const items = [
@@ -28,14 +30,14 @@ export function MobileBottomNav() {
           </div>
         </div>
       ))}
-      <div onClick={() => router.push("/ask")} data-behavior="-> ask" className="flex-1 cursor-pointer text-center">
+      <div onClick={() => requireAuth(() => router.push("/ask"))} data-behavior="-> ask (login required)" className="flex-1 cursor-pointer text-center">
         <div className="mx-auto flex h-[34px] w-[34px] items-center justify-center rounded-full bg-ink">
           <AddIcon style={{ fontSize: 18, color: "#fff" }} />
         </div>
       </div>
       <div
-        onClick={() => router.push("/notifications")}
-        data-behavior="-> notifications"
+        onClick={() => requireAuth(() => router.push("/notifications"))}
+        data-behavior="-> notifications (login required)"
         className="relative flex-1 cursor-pointer text-center"
       >
         <BellIcon style={{ fontSize: 20, color: tint(pathname === "/notifications") }} />
@@ -46,7 +48,7 @@ export function MobileBottomNav() {
           Alerts
         </div>
       </div>
-      <div onClick={() => router.push("/profile")} data-behavior="-> profile" className="flex-1 cursor-pointer text-center">
+      <div onClick={() => requireAuth(() => router.push("/profile"))} data-behavior="-> profile (login required)" className="flex-1 cursor-pointer text-center">
         <PersonIcon style={{ fontSize: 20, color: tint(pathname.startsWith("/profile")) }} />
         <div className="mt-0.5 text-[9px]" style={{ color: tint(pathname.startsWith("/profile")) }}>
           You

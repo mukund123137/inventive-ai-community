@@ -8,6 +8,7 @@ import { EmptyState } from "@/components/ui/States";
 import { PeachButton } from "@/components/ui/PeachButton";
 import { BackIcon } from "@/components/icons";
 import { useAuth } from "@/lib/auth";
+import { useAuthModal } from "@/lib/auth-modal";
 import { STATUS } from "@/lib/status";
 import { useAcceptAnswer, useSubmitAnswer, useToggleVote } from "@/lib/mutations";
 import { useMyVotes, useQuestion } from "@/lib/queries";
@@ -16,6 +17,7 @@ import type { ResolvedAnswer } from "@/lib/data-types";
 export function QuestionDetail({ slug }: { slug: string }) {
   const router = useRouter();
   const { profile } = useAuth();
+  const { requireAuth } = useAuthModal();
   const { data: q, isLoading } = useQuestion(slug);
   const { data: myVotes } = useMyVotes();
   const toggleVote = useToggleVote();
@@ -46,14 +48,6 @@ export function QuestionDetail({ slug }: { slug: string }) {
     window.addEventListener("hashchange", focusFromHash);
     return () => window.removeEventListener("hashchange", focusFromHash);
   }, [q]);
-
-  function requireLogin() {
-    if (!profile) {
-      router.push("/login");
-      return false;
-    }
-    return true;
-  }
 
   if (isLoading) return null;
 
@@ -107,10 +101,10 @@ export function QuestionDetail({ slug }: { slug: string }) {
             questionSlug={q.slug}
             highlighted={highlightId === a.id}
             voted={myVotes?.answers.has(a.id) ?? false}
-            onVote={() => requireLogin() && toggleVote.mutate({ targetType: "answer", targetId: a.id })}
+            onVote={() => requireAuth(() => toggleVote.mutate({ targetType: "answer", targetId: a.id }))}
             canAccept={canAccept}
             onAccept={() => acceptAnswer.mutate({ questionId: q.id, answerId: a.id })}
-            onReport={() => requireLogin() && setReportTarget({ answerId: a.id, kind: "Answer" })}
+            onReport={() => requireAuth(() => setReportTarget({ answerId: a.id, kind: "Answer" }))}
           />
         ))}
         {answers.length === 0 && (
@@ -138,10 +132,11 @@ export function QuestionDetail({ slug }: { slug: string }) {
             disabled={submitAnswer.isPending}
             onClick={() => {
               if (!answerDraft.trim() || submitAnswer.isPending) return;
-              if (!requireLogin()) return;
-              submitAnswer.mutate(
-                { questionId: q.id, body: answerDraft },
-                { onSuccess: () => setAnswerDraft("") }
+              requireAuth(() =>
+                submitAnswer.mutate(
+                  { questionId: q.id, body: answerDraft },
+                  { onSuccess: () => setAnswerDraft("") }
+                )
               );
             }}
             data-behavior="submit -> adds an answer (POST), appears in list"

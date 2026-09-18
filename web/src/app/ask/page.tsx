@@ -6,23 +6,23 @@ import { GrayButton, PeachButton } from "@/components/ui/PeachButton";
 import { BackIcon } from "@/components/icons";
 import { useSubmitQuestion } from "@/lib/mutations";
 import { useAuth } from "@/lib/auth";
+import { useAuthModal } from "@/lib/auth-modal";
 
 export default function AskPage() {
   const router = useRouter();
   const { profile, loading } = useAuth();
+  const { requireAuth } = useAuthModal();
   const submitQuestion = useSubmitQuestion();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
   function submit() {
     if (!title.trim() || submitQuestion.isPending) return;
-    if (!profile) {
-      router.push("/login");
-      return;
-    }
-    submitQuestion.mutate(
-      { title, body },
-      { onSuccess: (data) => router.push(`/questions/${data.slug}`) }
+    requireAuth(() =>
+      submitQuestion.mutate(
+        { title, body },
+        { onSuccess: (data) => router.push(`/questions/${data.slug}`) }
+      )
     );
   }
 

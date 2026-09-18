@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 import { Avatar } from "@/components/ui/Avatar";
 import { MenuIcon, SearchIcon } from "@/components/icons";
 import { useAuth } from "@/lib/auth";
+import { useAuthModal } from "@/lib/auth-modal";
 import { toAuthor } from "@/lib/data-types";
 
 export function MobileHeader() {
   const router = useRouter();
   const { profile } = useAuth();
+  const { openLogin } = useAuthModal();
 
   return (
     <header className="sticky top-0 z-20 flex h-[54px] items-center gap-2.5 border-b border-border-2 bg-white px-3.5 md:hidden">
@@ -29,7 +31,18 @@ export function MobileHeader() {
       </div>
       <div className="ml-auto flex items-center gap-3">
         <SearchIcon onClick={() => router.push("/search")} style={{ fontSize: 20, color: "#4A5154", cursor: "pointer" }} />
-        {profile && <Avatar author={toAuthor(profile)} size="sm" onClick={() => router.push(`/u/${profile.username}`)} />}
+        {profile ? (
+          <Avatar author={toAuthor(profile)} size="sm" onClick={() => router.push(`/u/${profile.username}`)} />
+        ) : (
+          <button
+            type="button"
+            onClick={openLogin}
+            data-behavior="open login modal"
+            className="cursor-pointer rounded-md border border-border bg-white px-3 py-1.5 text-[12px] font-semibold text-ink"
+          >
+            Log In
+          </button>
+        )}
       </div>
     </header>
   );

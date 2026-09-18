@@ -7,13 +7,13 @@ import { VoteButton } from "@/components/ui/VoteButton";
 import type { ResolvedQuestion } from "@/lib/data-types";
 import { useToggleVote } from "@/lib/mutations";
 import { useMyVotes } from "@/lib/queries";
-import { useAuth } from "@/lib/auth";
+import { useAuthModal } from "@/lib/auth-modal";
 import { STATUS } from "@/lib/status";
 import { truncate } from "@/lib/utils";
 
 export function QuestionCard({ q, spine = true }: { q: ResolvedQuestion; spine?: boolean }) {
   const router = useRouter();
-  const { profile } = useAuth();
+  const { requireAuth } = useAuthModal();
   const { data: myVotes } = useMyVotes();
   const toggleVote = useToggleVote();
   const voted = myVotes?.questions.has(q.id) ?? false;
@@ -43,7 +43,7 @@ export function QuestionCard({ q, spine = true }: { q: ResolvedQuestion; spine?:
             <VoteButton
               votes={q.votes}
               active={voted}
-              onToggle={() => (profile ? toggleVote.mutate({ targetType: "question", targetId: q.id }) : router.push("/login"))}
+              onToggle={() => requireAuth(() => toggleVote.mutate({ targetType: "question", targetId: q.id }))}
             />
           </div>
         </div>

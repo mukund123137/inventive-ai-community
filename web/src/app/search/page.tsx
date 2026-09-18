@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { SearchIcon } from "@/components/icons";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { EmptyState } from "@/components/ui/States";
+import { useAuthModal } from "@/lib/auth-modal";
 import { useQuestionsList, useSearchQuestions } from "@/lib/queries";
 import { STATUS } from "@/lib/status";
 
@@ -19,6 +20,7 @@ function useDebounced(value: string, delay: number) {
 
 function SearchPageInner() {
   const router = useRouter();
+  const { requireAuth } = useAuthModal();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const debouncedQuery = useDebounced(query, 300);
@@ -53,7 +55,7 @@ function SearchPageInner() {
           title="No results for that search"
           body="Try different keywords, or ask the community."
           ctaLabel="Ask a Question"
-          onCta={() => router.push("/ask")}
+          onCta={() => requireAuth(() => router.push("/ask"))}
         />
       )}
       <div className="flex flex-col gap-2.5">

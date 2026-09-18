@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Avatar } from "@/components/ui/Avatar";
 import { BellIcon } from "@/components/icons";
 import { useAuth } from "@/lib/auth";
+import { useAuthModal } from "@/lib/auth-modal";
 import { toAuthor } from "@/lib/data-types";
 import { useUnreadCount } from "@/lib/queries";
 
@@ -13,6 +14,7 @@ export function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const { profile } = useAuth();
+  const { requireAuth, openLogin } = useAuthModal();
   const unread = useUnreadCount();
   const isFeed = pathname === "/";
 
@@ -59,25 +61,38 @@ export function Header() {
       </nav>
       <button
         type="button"
-        onClick={() => router.push("/ask")}
-        data-behavior="-> Ask Question flow"
+        onClick={() => requireAuth(() => router.push("/ask"))}
+        data-behavior="-> Ask Question flow (login required)"
         className="ml-auto cursor-pointer rounded-md border border-peach bg-peach px-4 py-[9px] text-[13.5px] font-semibold whitespace-nowrap text-ink transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-white"
       >
         Ask a Question
       </button>
-      <div
-        onClick={() => router.push("/notifications")}
-        data-behavior="-> notifications"
-        className="relative flex-none cursor-pointer"
-      >
-        <BellIcon style={{ fontSize: 19, color: "#4A5154" }} />
-        {unread > 0 && (
-          <span className="absolute -top-[3px] -right-[3px] flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-magenta px-[3px] text-[9px] font-bold text-white">
-            {unread}
-          </span>
-        )}
-      </div>
-      {profile && <Avatar author={toAuthor(profile)} onClick={() => router.push(`/u/${profile.username}`)} />}
+      {profile ? (
+        <>
+          <div
+            onClick={() => router.push("/notifications")}
+            data-behavior="-> notifications"
+            className="relative flex-none cursor-pointer"
+          >
+            <BellIcon style={{ fontSize: 19, color: "#4A5154" }} />
+            {unread > 0 && (
+              <span className="absolute -top-[3px] -right-[3px] flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-magenta px-[3px] text-[9px] font-bold text-white">
+                {unread}
+              </span>
+            )}
+          </div>
+          <Avatar author={toAuthor(profile)} onClick={() => router.push(`/u/${profile.username}`)} />
+        </>
+      ) : (
+        <button
+          type="button"
+          onClick={openLogin}
+          data-behavior="open login modal"
+          className="flex-none cursor-pointer rounded-md border border-border bg-white px-4 py-[9px] text-[13.5px] font-semibold whitespace-nowrap text-ink hover:bg-surface-alt"
+        >
+          Log In
+        </button>
+      )}
     </header>
   );
 }

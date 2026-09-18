@@ -6,6 +6,7 @@ import { HomeSearch } from "@/components/HomeSearch";
 import { QuestionCard } from "@/components/QuestionCard";
 import { EmptyState, ErrorState, FeedSkeleton } from "@/components/ui/States";
 import { sortQuestions, type SortKey } from "@/lib/filters";
+import { useAuthModal } from "@/lib/auth-modal";
 import { useQuestionsList } from "@/lib/queries";
 
 const SORT_TABS: { key: SortKey; label: string }[] = [
@@ -25,6 +26,7 @@ export default function HomePage() {
 
 function HomePageInner() {
   const router = useRouter();
+  const { requireAuth } = useAuthModal();
   const searchParams = useSearchParams();
   const debugState = searchParams.get("state"); // QA-only override: ?state=loading|error
   const [sort, setSort] = useState<SortKey>("trending");
@@ -89,7 +91,7 @@ function HomePageInner() {
             title="No questions here yet"
             body="Nothing matches this view. Be the first to start the conversation."
             ctaLabel="Ask a Question"
-            onCta={() => router.push("/ask")}
+            onCta={() => requireAuth(() => router.push("/ask"))}
           />
         )}
         {isReady && (
